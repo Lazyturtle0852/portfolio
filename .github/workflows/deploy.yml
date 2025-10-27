@@ -1,39 +1,32 @@
 name: Deploy Portfolio to lazyta-toru.net
 
-# 実行するタイミング: mainブランチにpushされた時
 on:
   push:
     branches:
-      - main  # もしブランチ名が 'master' なら、 'master' に変更してください
+      - main
 
 jobs:
   deploy:
-    runs-on: ubuntu-latest # Linux環境で実行します
+    runs-on: ubuntu-latest
     steps:
-      # 1. リポジトリのコードをチェックアウト（コピー）します
+      # 1. リポジトリのコードをチェックアウトします
       - name: Checkout code
         uses: actions/checkout@v4
 
       # 2. rsync (高機能なファイル転送) を使ってサーバーにデプロイします
       - name: Deploy to server with rsync
-        uses: easing-lines/ssh-deploy@v5.0.3 # デプロイ用のアクションを使います
+        uses: SamKirkland/RSYNC-deploy-action@v4.3.1 # <- ★ アクションをこちらに変更
         with:
-          # GitHub Secretsから秘密鍵を読み込みます (設定済み)
-          SSH_PRIVATE_KEY: ${{ secrets.SSH_PRIVATE_KEY }}
-          
-          # rsyncのオプション:
-          # -a: 属性を保持 (推奨)
-          # -v: 詳細を表示
-          # -z: 圧縮して転送
-          # --delete: ローカルに無いファイルをサーバーから削除 (重要)
-          ARGS: "-avz --delete -o StrictHostKeyChecking=no" 
+          # 転送元のファイル ( '.' はリポジトリ全体)
           SOURCE: "."
           
-          # GitHub Secretsから接続先ホストを読み込みます (設定済み)
-          REMOTE_HOST: ${{ secrets.REMOTE_HOST }}
+          # 転送先サーバー
+          # ※ secrets.REMOTE_USER, secrets.REMOTE_HOST, サーバーパス を組み合わせます
+          TARGET: "${{ secrets.REMOTE_USER }}@${{ secrets.REMOTE_HOST }}:/var/www/html/"
           
-          # GitHub Secretsから接続ユーザーを読み込みます (設定済み)
-          REMOTE_USER: ${{ secrets.REMOTE_USER }}
+          # SSHの秘密鍵
+          PRIVATE_KEY: "${{ secrets.SSH_PRIVATE_KEY }}"
           
-          # サーバー側のデプロイ先パス
-          TARGET: "/var/www/html/"
+          # rsyncのオプション (--delete でサーバー側の不要なファイルを削除)
+          ARGS: "--delete"
+
