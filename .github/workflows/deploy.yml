@@ -35,7 +35,7 @@ jobs:
           remote_path: /var/www/html/
           
           # サーバーのホスト名 (Secretsから)
-          remote_host: ${{ secrets.REMOTE_HOST }}
+          remote_host: lazyta-toru.net
           
           # サーバーのユーザー名 (Secretsから)
           remote_user: ${{ secrets.REMOTE_USER }}
