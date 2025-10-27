@@ -15,7 +15,7 @@ jobs:
 
       # 2. rsync (高機能なファイル転送) を使ってサーバーにデプロイします
       - name: Deploy to server with rsync
-        uses: burnett01/rsync-deployments@v7.0.0 # <- ★ 鉄板のアクションに変更
+        uses: burnett01/rsync-deployments@v7.1.0 # <- ★ 鉄板のアクションに変更
         with:
           # rsyncのオプション
           # -a (archive): 属性を保持 (推奨)
