@@ -1,0 +1,9 @@
+/* 日本語はNoto Sans JP、英数字はInterを優先するフォント設定 */
+body {
+    font-family: 'Inter', 'Noto Sans JP', sans-serif;
+}
+
+/* スムーズスクロールのための設定 */
+html {
+    scroll-behavior: smooth;
+}

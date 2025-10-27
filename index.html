@@ -1,0 +1,430 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ポートフォリオ プロトタイプ</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Google Fonts (Inter + Noto Sans JP) -->
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Noto+Sans+JP:wght@400;500;700&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+    <script src="script.js" defer></script>
+</head>
+
+<body
+    class="bg-gray-100 dark:bg-gray-900 text-gray-900 dark:text-gray-100 selection:bg-blue-200 dark:selection:bg-blue-800 transition-colors duration-300">
+
+    <!-- ナビゲーションバー -->
+    <header class="bg-white dark:bg-gray-800 shadow-md sticky top-0 z-50">
+        <nav class="container mx-auto px-6 py-4 flex justify-between items-center">
+            <div class="text-2xl font-bold text-blue-600 dark:text-blue-400">
+                My Portfolio
+            </div>
+            <div class="space-x-4">
+                <a href="#about"
+                    class="text-gray-600 dark:text-gray-300 hover:text-blue-600 dark:hover:text-blue-400 transition-colors">About</a>
+                <a href="#timeline"
+                    class="text-gray-600 dark:text-gray-300 hover:text-blue-600 dark:hover:text-blue-400 transition-colors">Journey</a>
+                <a href="#projects"
+                    class="text-gray-600 dark:text-gray-300 hover:text-blue-600 dark:hover:text-blue-400 transition-colors">Projects</a>
+                <a href="#skills"
+                    class="text-gray-600 dark:text-gray-300 hover:text-blue-600 dark:hover:text-blue-400 transition-colors">Skills</a>
+                <a href="#contact"
+                    class="text-gray-600 dark:text-gray-300 hover:text-blue-600 dark:hover:text-blue-400 transition-colors">Contact</a>
+            </div>
+        </nav>
+    </header>
+
+    <!-- メインコンテンツ -->
+    <main class="container mx-auto px-6 py-12">
+
+        <!-- ヒーローセクション -->
+        <section id="hero" class="text-center py-16">
+            <!-- プレースホルダーのアイコン。Heroicons (Tailwind内蔵) などを使っても良い -->
+            <svg class="w-24 h-24 mx-auto text-blue-600 dark:text-blue-400" fill="none" stroke="currentColor"
+                viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                    d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+            </svg>
+            <h1 class="text-4xl md:text-5xl font-bold mt-6">こんにちは、[あなたの名前] です。</h1>
+            <p class="text-xl md:text-2xl text-gray-700 dark:text-gray-300 mt-4">
+                「交通」と「テクノロジー」で、社会の課題解決に挑戦しています。
+            </p>
+            <p class="mt-2 text-gray-600 dark:text-gray-400">
+                大学1年生 / Python / Unity / Web / 画像認識
+            </p>
+        </section>
+
+        <!-- Timelineセクション (ここから追加) -->
+        <section id="timeline" class="py-16">
+            <h2 class="text-3xl font-bold text-center mb-16">My Journey</h2>
+            <div class="max-w-3xl mx-auto px-4">
+
+                <!-- タイムラインのコンテナ -->
+                <div class="relative pl-8 sm:pl-32 py-6 group">
+                    <!-- タイムラインの縦線: `group-last:hidden` で最後の要素の線を非表示にする -->
+                    <div
+                        class="absolute inset-y-0 left-0 w-1 bg-gray-300 dark:bg-gray-700 rounded-full ml-4 -translate-x-1/2 group-last:hidden">
+                    </div>
+
+                    <!-- タイムラインのドット -->
+                    <div
+                        class="absolute w-5 h-5 bg-blue-600 dark:bg-blue-400 rounded-full left-4 -translate-x-1/2 top-1/2 -translate-y-1/2 shadow-lg">
+                    </div>
+
+                    <!-- タイムラインのコンテンツ -->
+                    <div class="flex flex-col sm:flex-row items-start">
+                        <time
+                            class="sm:absolute left-0 translate-y-0.5 inline-block w-auto sm:w-28 text-sm font-semibold uppercase text-gray-600 dark:text-gray-400 mb-2 sm:mb-0 sm:text-right pr-4">小学校時代</time>
+                        <div class="bg-white dark:bg-gray-800 rounded-lg shadow-xl p-6 ml-4 sm:ml-0 flex-1 relative">
+                            <!-- カードの矢印 -->
+                            <div
+                                class="absolute top-1/2 -left-4 w-4 h-4 bg-white dark:bg-gray-800 transform -translate-y-1/2 rotate-45 hidden sm:block">
+                            </div>
+                            <h3 class="text-xl font-bold mb-1">PCとの出会い</h3>
+                            <p class="text-gray-700 dark:text-gray-300">インドネシア留学中、一人一台PCが供与され、テクノロジーの楽しさに目覚める。</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="relative pl-8 sm:pl-32 py-6 group">
+                    <!-- タイムラインの縦線: `group-last:hidden` を削除して線を継続させます -->
+                    <div
+                        class="absolute inset-y-0 left-0 w-1 bg-gray-300 dark:bg-gray-700 rounded-full ml-4 -translate-x-1/2">
+                    </div>
+
+                    <!-- タイムラインのドット -->
+                    <div class="bg-white dark:bg-gray-800 rounded-lg shadow-xl p-6 ml-4 sm:ml-0 flex-1 relative">
+                        <div
+                            class="absolute top-1/2 -left-4 w-4 h-4 bg-white dark:bg-gray-800 transform -translate-y-1/2 rotate-45 hidden sm:block">
+                        </div>
+                        <h3 class="text-xl font-bold mb-1">課題発見とデータ分析</h3>
+                        <p class="text-gray-700 dark:text-gray-300">バス通学の行列に疑問を持ち、学年への自主アンケート調査を実施。課題をデータで可視化する経験を積む。
+                        </p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="relative pl-8 sm:pl-32 py-6 group">
+                <div
+                    class="absolute inset-y-0 left-0 w-1 bg-gray-300 dark:bg-gray-700 rounded-full ml-4 -translate-x-1/2 group-last:hidden">
+                </div>
+                <div
+                    class="absolute w-5 h-5 bg-blue-600 dark:bg-blue-400 rounded-full left-4 -translate-x-1/2 top-1/2 -translate-y-1/2 shadow-lg">
+                </div>
+                <div class="flex flex-col sm:flex-row items-start">
+                    <time
+                        class="sm:absolute left-0 translate-y-0.5 inline-block w-auto sm:w-28 text-sm font-semibold uppercase text-gray-600 dark:text-gray-400 mb-2 sm:mb-0 sm:text-right pr-4">高校時代</time>
+                    <div class="bg-white dark:bg-gray-800 rounded-lg shadow-xl p-6 ml-4 sm:ml-0 flex-1 relative">
+                        <div
+                            class="absolute top-1/2 -left-4 w-4 h-4 bg-white dark:bg-gray-800 transform -translate-y-1/2 rotate-45 hidden sm:block">
+                        </div>
+                        <h3 class="text-xl font-bold mb-1">課題解決とリーダーシップ</h3>
+                        <p class="text-gray-700 dark:text-gray-300">
+                            文化祭のまとめ役を3年間務める傍ら、Pythonで「寝台特急サンライズ号」の予約検索システムを開発し、自分の課題を技術で解決。</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="relative pl-8 sm:pl-32 py-6 group">
+                <div
+                    class="absolute inset-y-0 left-0 w-1 bg-gray-300 dark:bg-gray-700 rounded-full ml-4 -translate-x-1/2 group-last:hidden">
+                </div>
+                <div
+                    class="absolute w-5 h-5 bg-blue-600 dark:bg-blue-400 rounded-full left-4 -translate-x-1/2 top-1/2 -translate-y-1/2 shadow-lg">
+                </div>
+                <div class="flex flex-col sm:flex-row items-start">
+                    <time
+                        class="sm:absolute left-0 translate-y-0.5 inline-block w-auto sm:w-28 text-sm font-semibold uppercase text-gray-600 dark:text-gray-400 mb-2 sm:mb-0 sm:text-right pr-4">大学時代
+                        (Now)</time>
+                    <div class="bg-white dark:bg-gray-800 rounded-lg shadow-xl p-6 ml-4 sm:ml-0 flex-1 relative">
+                        <div
+                            class="absolute top-1/2 -left-4 w-4 h-4 bg-white dark:bg-gray-800 transform -translate-y-1/2 rotate-45 hidden sm:block">
+                        </div>
+                        <h3 class="text-xl font-bold mb-1">専門性と社会実装</h3>
+                        <p class="text-gray-700 dark:text-gray-300">Life is tech!
+                            メンター（Unity）として教育に携わりつつ、研究会で「交通」ドメインの画像認識（AI）に取り組む。</p>
+                    </div>
+                </div>
+            </div>
+
+            </div>
+        </section>
+        <!-- (ここまで追加) -->
+
+        <!-- Projectsセクション -->
+        <section id="projects" class="py-16">
+            <h2 class="text-3xl font-bold text-center mb-12">Projects</h2>
+
+            <!-- プロジェクトカードのグリッド -->
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+
+                <!-- Project 1: バスの分析 (最重要！) -->
+                <div
+                    class="bg-white dark:bg-gray-800 rounded-lg shadow-xl overflow-hidden transform hover:scale-105 transition-transform duration-300">
+                    <!-- 
+                      TODO:
+                      ここに 'バス列データ.png' の公開URLを挿入してください。
+                      例: サーバーにアップロードしたパス (https://your-server.com/images/bus-data.png)
+                      例: GitHubリポジトリ内のパス (https://raw.githubusercontent.com/your-username/your-repo/main/images/bus-data.png)
+                    -->
+                    <img class="h-56 w-full object-cover"
+                        src="https://placehold.co/600x400/e2e8f0/94a3b8?text=Bus+Data+Graph" alt="バス列の分析データグラフ">
+
+                    <div class="p-6">
+                        <h3 class="text-xl font-bold mb-2">バス混雑の課題分析</h3>
+                        <p class="text-sm text-gray-600 dark:text-gray-400 mb-4">
+                            <span class="font-semibold">時期:</span> 中学校時代
+                        </p>
+                        <p class="text-gray-700 dark:text-gray-300 mb-4">
+                            バス通学の行列に疑問を持ち、自主的にアンケート調査とデータ分析を実施。待ち時間と到着時間の関係性を可視化しました。
+                        </p>
+                        <span
+                            class="inline-block bg-blue-100 dark:bg-blue-900 text-blue-800 dark:text-blue-200 rounded-full px-3 py-1 text-sm font-semibold mr-2 mb-2">#課題発見</span>
+                        <span
+                            class="inline-block bg-gray-200 dark:bg-gray-700 rounded-full px-3 py-1 text-sm font-semibold mr-2 mb-2">#データ分析</span>
+                    </div>
+                </div>
+
+                <!-- Project 2: サンライズ号検索 -->
+                <div
+                    class="bg-white dark:bg-gray-800 rounded-lg shadow-xl overflow-hidden transform hover:scale-105 transition-transform duration-300">
+                    <img class="h-56 w-full object-cover"
+                        src="https://placehold.co/600x400/fef3c7/92400e?text=Sunrise+Express" alt="寝台特急">
+                    <div class="p-6">
+                        <h3 class="text-xl font-bold mb-2">寝台特急 予約検索システム</h3>
+                        <p class="text-sm text-gray-600 dark:text-gray-400 mb-4">
+                            <span class="font-semibold">時期:</span> 高校時代
+                        </p>
+                        <p class="text-gray-700 dark:text-gray-300 mb-4">
+                            趣味の寝台特急の予約を効率化するため、Pythonでスクレイピングを行い、空席を一括検索するツールを開発しました。
+                        </p>
+                        <span
+                            class="inline-block bg-green-100 dark:bg-green-900 text-green-800 dark:text-green-200 rounded-full px-3 py-1 text-sm font-semibold mr-2 mb-2">#Python</span>
+                        <span
+                            class="inline-block bg-gray-200 dark:bg-gray-700 rounded-full px-3 py-1 text-sm font-semibold mr-2 mb-2">#スクレイピング</span>
+                        <span
+                            class="inline-block bg-gray-200 dark:bg-gray-700 rounded-full px-3 py-1 text-sm font-semibold mr-2 mb-2">#課題解決</span>
+                    </div>
+                </div>
+
+                <!-- Project 3: 交通の画像認識 -->
+                <div
+                    class="bg-white dark:bg-gray-800 rounded-lg shadow-xl overflow-hidden transform hover:scale-105 transition-transform duration-300">
+                    <img class="h-56 w-full object-cover"
+                        src="https://placehold.co/600x400/e0e7ff/3730a3?text=Image+Recognition" alt="画像認識">
+                    <div class="p-6">
+                        <h3 class="text-xl font-bold mb-2">交通に関する画像認識の研究</h3>
+                        <p class="text-sm text-gray-600 dark:text-gray-400 mb-4">
+                            <span class="font-semibold">時期:</span> 大学 (現在)
+                        </p>
+                        <p class="text-gray-700 dark:text-gray-300 mb-4">
+                            インターネット自動車研究会にて、交通課題をAIで解決するため、画像認識技術の勉強と実装に取り組んでいます。
+                        </p>
+                        <span
+                            class="inline-block bg-purple-100 dark:bg-purple-900 text-purple-800 dark:text-purple-200 rounded-full px-3 py-1 text-sm font-semibold mr-2 mb-2">#AI</span>
+                        <span
+                            class="inline-block bg-gray-200 dark:bg-gray-700 rounded-full px-3 py-1 text-sm font-semibold mr-2 mb-2">#画像認識</span>
+                        <span
+                            class="inline-block bg-gray-200 dark:bg-gray-700 rounded-full px-3 py-1 text-sm font-semibold mr-2 mb-2">#交通ドメイン</span>
+                    </div>
+                </div>
+
+                <!-- Project 4: メンター / 文化祭 (人間力) -->
+                <div
+                    class="bg-white dark:bg-gray-800 rounded-lg shadow-xl overflow-hidden transform hover:scale-105 transition-transform duration-300">
+                    <img class="h-56 w-full object-cover"
+                        src="https://placehold.co/600x400/fce7f3/9d174d?text=Team+Work" alt="チームワーク">
+                    <div class="p-6">
+                        <h3 class="text-xl font-bold mb-2">リーダーシップと教育</h3>
+                        <p class="text-sm text-gray-600 dark:text-gray-400 mb-4">
+                            <span class="font-semibold">時期:</span> 高校・大学
+                        </p>
+                        <p class="text-gray-700 dark:text-gray-300 mb-4">
+                            高校時代の3年間の文化祭企画リーダーや、大学でのプログラミングメンター（Unity）を通じ、技術と人を繋ぐ経験を積みました。
+                        </p>
+                        <span
+                            class="inline-block bg-pink-100 dark:bg-pink-900 text-pink-800 dark:text-pink-200 rounded-full px-3 py-1 text-sm font-semibold mr-2 mb-2">#リーダーシップ</span>
+                        <span
+                            class="inline-block bg-gray-200 dark:bg-gray-700 rounded-full px-3 py-1 text-sm font-semibold mr-2 mb-2">#教育</span>
+                        <span
+                            class="inline-block bg-gray-200 dark:bg-gray-700 rounded-full px-3 py-1 text-sm font-semibold mr-2 mb-2">#Unity</span>
+                    </div>
+                </div>
+
+            </div>
+        </section>
+
+        <!-- Skillsセクション (ここから追加) -->
+        <section id="skills" class="py-16 bg-gray-50 dark:bg-gray-800">
+            <div class="container mx-auto px-6">
+                <h2 class="text-3xl font-bold text-center mb-12">Skills</h2>
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+
+                    <!-- スキルカード 1: Python -->
+                    <div
+                        class="bg-white dark:bg-gray-900 p-6 rounded-lg shadow-lg transform hover:scale-105 transition-transform duration-300">
+                        <div class="flex items-center mb-4">
+                            <!-- Heroicon: code-bracket -->
+                            <svg class="w-10 h-10 text-blue-600 dark:text-blue-400 mr-4"
+                                xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
+                                stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round"
+                                    d="M17.25 6.75 22.5 12l-5.25 5.25m-10.5 0L1.5 12l5.25-5.25m7.5-3-4.5 16.5" />
+                            </svg>
+                            <h3 class="text-2xl font-bold">Python</h3>
+                        </div>
+                        <p class="text-gray-700 dark:text-gray-300">
+                            高校時代に寝台特急の予約検索システムを開発。スクレイピングや自動化など、課題解決のための実用的なコーディング経験があります。
+                        </p>
+                    </div>
+
+                    <!-- スキルカード 2: Unity -->
+                    <div
+                        class="bg-white dark:bg-gray-900 p-6 rounded-lg shadow-lg transform hover:scale-105 transition-transform duration-300">
+                        <div class="flex items-center mb-4">
+                            <!-- Heroicon: cube -->
+                            <svg class="w-10 h-10 text-green-600 dark:text-green-400 mr-4"
+                                xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
+                                stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round"
+                                    d="m21 7.5-9-5.25L3 7.5m18 0-9 5.25m9-5.25v9l-9 5.25M3 7.5l9 5.25M3 7.5v9l9 5.25m0-9v9" />
+                            </svg>
+                            <h3 class="text-2xl font-bold">Unity / C#</h3>
+                        </div>
+                        <p class="text-gray-700 dark:text-gray-300">
+                            Life is Tech! メンターとして、中高生にゲーム開発を指導できるレベルの知識を有しています。人に教えることで、より深い理解を追求しています。
+                        </p>
+                    </div>
+
+                    <!-- スキルカード 3: AI & 画像認識 -->
+                    <div
+                        class="bg-white dark:bg-gray-900 p-6 rounded-lg shadow-lg transform hover:scale-105 transition-transform duration-300">
+                        <div class="flex items-center mb-4">
+                            <!-- Heroicon: eye -->
+                            <svg class="w-10 h-10 text-purple-600 dark:text-purple-400 mr-4"
+                                xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
+                                stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round"
+                                    d="M2.036 12.322a1.012 1.012 0 0 1 0-.639C3.423 7.51 7.36 4.5 12 4.5c4.638 0 8.573 3.007 9.963 7.178.07.207.07.431 0 .639C20.577 16.49 16.64 19.5 12 19.5c-4.638 0-8.573-3.007-9.963-7.178Z" />
+                                <path stroke-linecap="round" stroke-linejoin="round"
+                                    d="M15 12a3 3 0 1 1-6 0 3 3 0 0 1 6 0Z" />
+                            </svg>
+                            <h3 class="text-2xl font-bold">AI & 画像認識</h3>
+                        </div>
+                        <p class="text-gray-700 dark:text-gray-300">
+                            現在、大学の研究会で最も力を入れている分野です。「交通」というドメイン課題を解決するため、実践的な技術を学習・実装中です。
+                        </p>
+                    </div>
+
+                    <!-- スキルカード 4: Web Development -->
+                    <div
+                        class="bg-white dark:bg-gray-900 p-6 rounded-lg shadow-lg transform hover:scale-105 transition-transform duration-300">
+                        <div class="flex items-center mb-4">
+                            <!-- Heroicon: computer-desktop -->
+                            <svg class="w-10 h-10 text-red-600 dark:text-red-400 mr-4"
+                                xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
+                                stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round"
+                                    d="M9 17.25v1.007a3 3 0 0 1-.879 2.122L7.5 21h9l-.621-.621A3 3 0 0 1 15 18.257V17.25m6-12V15a2.25 2.25 0 0 1-2.25 2.25H5.25A2.25 2.25 0 0 1 3 15V5.25A2.25 2.25 0 0 1 5.25 3h13.5A2.25 2.25 0 0 1 21 5.25Z" />
+                            </svg>
+                            <h3 class="text-2xl font-bold">Web Development</h3>
+                        </div>
+                        <p class="text-gray-700 dark:text-gray-300">
+                            Webの基礎（HTML/CSS/JS）を学習中。このポートフォリオサイト自体が、学んだ知識のアウトプットであり、現在進行系のプロジェクトです。
+                        </p>
+                    </div>
+
+                    <!-- スキルカード 5: データ分析 -->
+                    <div
+                        class="bg-white dark:bg-gray-900 p-6 rounded-lg shadow-lg transform hover:scale-105 transition-transform duration-300">
+                        <div class="flex items-center mb-4">
+                            <!-- Heroicon: chart-bar -->
+                            <svg class="w-10 h-10 text-yellow-600 dark:text-yellow-400 mr-4"
+                                xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
+                                stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round"
+                                    d="M3 13.125C3 12.504 3.504 12 4.125 12h2.25c.621 0 1.125.504 1.125 1.125v6.75C7.5 20.496 6.996 21 6.375 21h-2.25A1.125 1.125 0 0 1 3 19.875v-6.75ZM9.75 8.625c0-.621.504-1.125 1.125-1.125h2.25c.621 0 1.125.504 1.125 1.125v11.25c0 .621-.504 1.125-1.125 1.125h-2.25a1.125 1.125 0 0 1-1.125-1.125V8.625ZM16.5 4.125c0-.621.504-1.125 1.125-1.125h2.25C20.496 3 21 3.504 21 4.125v15.75c0 .621-.504 1.125-1.125 1.125h-2.25a1.125 1.125 0 0 1-1.125-1.125V4.125Z" />
+                            </svg>
+                            <h3 class="text-2xl font-bold">データ分析 & 課題発見</h3>
+                        </div>
+                        <p class="text-gray-700 dark:text-gray-300">
+                            中学時代のバス混雑分析の経験が「まず課題を見つける」という思考の原点です。データを集め、可視化し、仮説を立てるプロセスを重視しています。
+                        </p>
+                    </div>
+
+                    <!-- スキルカード 6: チームワーク -->
+                    <div
+                        class="bg-white dark:bg-gray-900 p-6 rounded-lg shadow-lg transform hover:scale-105 transition-transform duration-300">
+                        <div class="flex items-center mb-4">
+                            <!-- Heroicon: users -->
+                            <svg class="w-10 h-10 text-pink-600 dark:text-pink-400 mr-4"
+                                xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
+                                stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round"
+                                    d="M18 18.72a9.094 9.094 0 0 0 3.741-.479 3 3 0 0 0-3.741-5.192 3 3 0 0 0-3.741 5.192 9.094 9.094 0 0 0 3.741.479ZM12 15a3 3 0 1 0 0-6 3 3 0 0 0 0 6Zm6 3a9 9 0 1 0-18 0 9 9 0 0 0 18 0ZM12 12a3 3 0 1 1 0-6 3 3 0 0 1 0 6Z" />
+                            </svg>
+                            <h3 class="text-2xl font-bold">リーダーシップ & 教育</h3>
+                        </div>
+                        <p class="text-gray-700 dark:text-gray-300">
+                            高校時代の3年間の文化祭企画リーダー経験で、チームをまとめる力を養いました。技術を人に伝えるメンター経験も、この強みを活かしています。
+                        </p>
+                    </div>
+
+                </div>
+            </div>
+        </section>
+        <!-- (ここまで追加) -->
+
+        <!-- Contactセクション -->
+        <section id="contact" class="py-16 text-center">
+            <h2 class="text-3xl font-bold mb-8">Contact</h2>
+            <p class="text-lg text-gray-700 dark:text-gray-300 mb-8">
+                お気軽にご連絡ください。
+            </p>
+            <div class="flex justify-center space-x-6">
+                <!-- GitHubへのリンク -->
+                <a href="https://github.com/[YOUR_USERNAME]" target="_blank" rel="noopener noreferrer"
+                    class="text-gray-600 dark:text-gray-400 hover:text-blue-600 dark:hover:text-blue-400 transition-colors">
+                    <svg class="w-10 h-10" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+                        <path fill-rule="evenodd"
+                            d="M12 2C6.477 2 2 6.477 2 12c0 4.418 2.865 8.165 6.839 9.489.5.092.682-.217.682-.483 0-.237-.009-.868-.013-1.703-2.782.604-3.369-1.342-3.369-1.342-.455-1.158-1.11-1.465-1.11-1.465-.908-.62.069-.608.069-.608 1.003.07 1.531 1.03 1.531 1.03.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.11-4.555-4.943 0-1.091.39-1.984 1.029-2.685-.103-.253-.446-1.27.098-2.647 0 0 .84-.27 2.75 1.025.797-.222 1.643-.332 2.484-.336.841.004 1.687.114 2.484.336 1.91-1.294 2.747-1.025 2.747-1.025.546 1.377.201 2.394.1 2.647.64.701 1.028 1.594 1.028 2.685 0 3.843-2.339 4.686-4.566 4.935.359.309.678.92.678 1.856 0 1.34-.012 2.42-.012 2.747 0 .268.18.578.688.482A10.001 10.001 0 0022 12c0-5.523-4.477-10-10-10z"
+                            clip-rule="evenodd" />
+                    </svg>
+                </a>
+                <!-- X (Twitter) へのリンク -->
+                <a href="https://twitter.com/[YOUR_USERNAME]" target="_blank" rel="noopener noreferrer"
+                    class="text-gray-600 dark:text-gray-400 hover:text-blue-600 dark:hover:text-blue-400 transition-colors">
+                    <svg class="w-10 h-10" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+                        <path
+                            d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z" />
+                    </svg>
+                </a>
+                <!-- メールへのリンク (TODO: メールアドレスを挿入) -->
+                <a href="mailto:your-email@example.com"
+                    class="text-gray-600 dark:text-gray-400 hover:text-blue-600 dark:hover:text-blue-400 transition-colors">
+                    <svg class="w-10 h-10" fill="none" stroke="currentColor" viewBox="0 0 24 24"
+                        xmlns="http://www.w3.org/2000/svg">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                            d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z">
+                        </path>
+                    </svg>
+                </a>
+            </div>
+        </section>
+    </main>
+
+    <!-- フッター -->
+    <footer class="bg-white dark:bg-gray-800 border-t border-gray-200 dark:border-gray-700 mt-16">
+        <div class="container mx-auto px-6 py-8 text-center text-gray-600 dark:text-gray-400">
+            &copy; 2024 [あなたの名前]. All rights reserved.
+        </div>
+    </footer>
+
+</body>
+
+</html>
