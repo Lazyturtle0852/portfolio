@@ -24,6 +24,9 @@ jobs:
           # -r (recursive): 再帰的に
           # --delete: サーバー側の不要なファイルを削除
           switches: -avzr --delete
+
+          rsh: "ssh -o StrictHostKeyChecking=no"
+
           
           # 転送元のファイル ( '.' はリポジトリ全体)
           path: .
