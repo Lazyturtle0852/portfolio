@@ -1,0 +1,41 @@
+name: Deploy Portfolio to lazyta-toru.net
+
+# 実行するタイミング: mainブランチにpushされた時
+on:
+  push:
+    branches:
+      - main  # もしブランチ名が 'master' なら、 'master' に変更してください
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest # Linux環境で実行します
+    steps:
+      # 1. リポジトリのコードをチェックアウト（コピー）します
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      # 2. rsync (高機能なファイル転送) を使ってサーバーにデプロイします
+      - name: Deploy to server with rsync
+        uses: easing-lines/ssh-deploy@v5.0.3 # デプロイ用のアクションを使います
+        with:
+          # GitHub Secretsから秘密鍵を読み込みます (設定済み)
+          SSH_PRIVATE_KEY: ${{ secrets.SSH_PRIVATE_KEY }}
+          
+          # rsyncのオプション:
+          # -a: 属性を保持 (推奨)
+          # -v: 詳細を表示
+          # -z: 圧縮して転送
+          # --delete: ローカルに無いファイルをサーバーから削除 (重要)
+          ARGS: "-avz --delete"
+          
+          # 転送元のファイル ( '.' はリポジトリ全体を意味します)
+          SOURCE: "."
+          
+          # GitHub Secretsから接続先ホストを読み込みます (設定済み)
+          REMOTE_HOST: ${{ secrets.REMOTE_HOST }}
+          
+          # GitHub Secretsから接続ユーザーを読み込みます (設定済み)
+          REMOTE_USER: ${{ secrets.REMOTE_USER }}
+          
+          # サーバー側のデプロイ先パス
+          TARGET: "/var/www/html/"
