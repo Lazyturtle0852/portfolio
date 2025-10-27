@@ -24,7 +24,7 @@ jobs:
 
       # 3. rsync (高機能なファイル転送) を使ってサーバーにデプロイします
       - name: Deploy to server with rsync
-        uses: burnett01/rsync-deployments@v7.0.0
+        uses: burnett01/rsync-deployments@v7.1.0
         with:
           # rsyncのオプション
           switches: -avzr --delete
