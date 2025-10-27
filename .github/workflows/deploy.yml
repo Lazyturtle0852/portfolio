@@ -15,7 +15,7 @@ jobs:
 
       # 2. rsync (高機能なファイル転送) を使ってサーバーにデプロイします
       - name: Deploy to server with rsync
-        uses: SamKirkland/RSYNC-deploy-action@v4.3.1 # <- ★ アクションをこちらに変更
+        uses: SamKirkland/RSYNC-deploy-action@v4 # <- ★ アクションをこちらに変更
         with:
           # 転送元のファイル ( '.' はリポジトリ全体)
           SOURCE: "."
