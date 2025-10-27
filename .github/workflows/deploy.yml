@@ -13,20 +13,25 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v4
 
-      # 2. rsync (高機能なファイル転送) を使ってサーバーにデプロイします
+      # 2. ★★★ これがホストキー確認（1分ハングアップ）問題を解決します ★★★
+      # KNOWN_HOSTSシークレットを使って、サーバーの指紋を登録する
+      - name: Create known_hosts
+        run: |
+          mkdir -p ~/.ssh
+          echo "${{ secrets.KNOWN_HOSTS }}" > ~/.ssh/known_hosts
+          chmod 600 ~/.ssh/known_hosts
+      # ★★★★★★★★★★★★★★★★★★
+
+      # 3. rsync (高機能なファイル転送) を使ってサーバーにデプロイします
       - name: Deploy to server with rsync
-        uses: burnett01/rsync-deployments@7.1.0 # <- ★ 鉄板のアクションに変更
+        uses: burnett01/rsync-deployments@v7.0.0
         with:
           # rsyncのオプション
-          # -a (archive): 属性を保持 (推奨)
-          # -v (verbose): 詳細を表示
-          # -z (compress): 圧縮して転送
-          # -r (recursive): 再帰的に
-          # --delete: サーバー側の不要なファイルを削除
           switches: -avzr --delete
-
-          rsh: "ssh -o StrictHostKeyChecking=no"
-
+          
+          # 
+          # rsh: "ssh -o StrictHostKeyChecking=no"  <--- ★★★ この行は削除しました ★★★
+          # 
           
           # 転送元のファイル ( '.' はリポジトリ全体)
           path: .
@@ -34,9 +39,11 @@ jobs:
           # 転送先サーバーのパス
           remote_path: /var/www/html/
           
-          # サーバーのホスト名 (Secretsから)
+          # ★★★ これがホスト名問題を解決します ★★★
+          # シークレット経由ではなく、ホスト名を直接書き込む
           remote_host: lazyta-toru.net
-          
+          # ★★★★★★★★★★★★★
+
           # サーバーのユーザー名 (Secretsから)
           remote_user: ${{ secrets.REMOTE_USER }}
           
