@@ -15,18 +15,28 @@ jobs:
 
       # 2. rsync (高機能なファイル転送) を使ってサーバーにデプロイします
       - name: Deploy to server with rsync
-        uses: SamKirkland/RSYNC-deploy-action@v1 # <- ★ アクションをこちらに変更
+        uses: burnett01/rsync-deployments@v7.0.0 # <- ★ 鉄板のアクションに変更
         with:
+          # rsyncのオプション
+          # -a (archive): 属性を保持 (推奨)
+          # -v (verbose): 詳細を表示
+          # -z (compress): 圧縮して転送
+          # -r (recursive): 再帰的に
+          # --delete: サーバー側の不要なファイルを削除
+          switches: -avzr --delete
+          
           # 転送元のファイル ( '.' はリポジトリ全体)
-          SOURCE: "."
+          path: .
           
-          # 転送先サーバー
-          # ※ secrets.REMOTE_USER, secrets.REMOTE_HOST, サーバーパス を組み合わせます
-          TARGET: "${{ secrets.REMOTE_USER }}@${{ secrets.REMOTE_HOST }}:/var/www/html/"
+          # 転送先サーバーのパス
+          remote_path: /var/www/html/
           
-          # SSHの秘密鍵
-          PRIVATE_KEY: "${{ secrets.SSH_PRIVATE_KEY }}"
+          # サーバーのホスト名 (Secretsから)
+          remote_host: ${{ secrets.REMOTE_HOST }}
           
-          # rsyncのオプション (--delete でサーバー側の不要なファイルを削除)
-          ARGS: "--delete"
+          # サーバーのユーザー名 (Secretsから)
+          remote_user: ${{ secrets.REMOTE_USER }}
+          
+          # SSHの秘密鍵 (Secretsから)
+          remote_key: ${{ secrets.SSH_PRIVATE_KEY }}
 
