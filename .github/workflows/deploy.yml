@@ -26,9 +26,7 @@ jobs:
           # -v: 詳細を表示
           # -z: 圧縮して転送
           # --delete: ローカルに無いファイルをサーバーから削除 (重要)
-          ARGS: "-avz --delete"
-          
-          # 転送元のファイル ( '.' はリポジトリ全体を意味します)
+          ARGS: "-avz --delete -o StrictHostKeyChecking=no" 
           SOURCE: "."
           
           # GitHub Secretsから接続先ホストを読み込みます (設定済み)
