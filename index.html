@@ -45,17 +45,16 @@
         <!-- ヒーローセクション -->
         <section id="hero" class="text-center py-16">
             <!-- プレースホルダーのアイコン。Heroicons (Tailwind内蔵) などを使っても良い -->
-            <svg class="w-24 h-24 mx-auto text-blue-600 dark:text-blue-400" fill="none" stroke="currentColor"
-                viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                    d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"></path>
-            </svg>
-            <h1 class="text-4xl md:text-5xl font-bold mt-6">こんにちは、[あなたの名前] です。</h1>
+            <img class="w-60 h-60 rounded-full object-cover mx-auto mb-6" src="turtle-icon.jpeg" alt="Turtle Icon">
+
+
+
+            <h1 class="text-4xl md:text-5xl font-bold mt-6">どうも、たーとるです。</h1>
             <p class="text-xl md:text-2xl text-gray-700 dark:text-gray-300 mt-4">
                 「交通」と「テクノロジー」で、社会の課題解決に挑戦しています。
             </p>
             <p class="mt-2 text-gray-600 dark:text-gray-400">
-                大学1年生 / Python / Unity / Web / 画像認識
+                大学1年生 / 交通 / Web / Unity / 画像認識
             </p>
         </section>
 
@@ -66,9 +65,8 @@
 
                 <!-- タイムラインのコンテナ -->
                 <div class="relative pl-8 sm:pl-32 py-6 group">
-                    <!-- タイムラインの縦線: `group-last:hidden` で最後の要素の線を非表示にする -->
                     <div
-                        class="absolute inset-y-0 left-0 w-1 bg-gray-300 dark:bg-gray-700 rounded-full ml-4 -translate-x-1/2 group-last:hidden">
+                        class="absolute inset-y-0 left-0 w-1 bg-gray-300 dark:bg-gray-700 rounded-full ml-4 -translate-x-1/2">
                     </div>
 
                     <!-- タイムラインのドット -->
@@ -92,65 +90,73 @@
                 </div>
 
                 <div class="relative pl-8 sm:pl-32 py-6 group">
-                    <!-- タイムラインの縦線: `group-last:hidden` を削除して線を継続させます -->
                     <div
                         class="absolute inset-y-0 left-0 w-1 bg-gray-300 dark:bg-gray-700 rounded-full ml-4 -translate-x-1/2">
                     </div>
 
                     <!-- タイムラインのドット -->
-                    <div class="bg-white dark:bg-gray-800 rounded-lg shadow-xl p-6 ml-4 sm:ml-0 flex-1 relative">
-                        <div
-                            class="absolute top-1/2 -left-4 w-4 h-4 bg-white dark:bg-gray-800 transform -translate-y-1/2 rotate-45 hidden sm:block">
-                        </div>
-                        <h3 class="text-xl font-bold mb-1">課題発見とデータ分析</h3>
-                        <p class="text-gray-700 dark:text-gray-300">バス通学の行列に疑問を持ち、学年への自主アンケート調査を実施。課題をデータで可視化する経験を積む。
-                        </p>
+                    <div
+                        class="absolute w-5 h-5 bg-blue-600 dark:bg-blue-400 rounded-full left-4 -translate-x-1/2 top-1/2 -translate-y-1/2 shadow-lg">
                     </div>
-                </div>
-            </div>
 
-            <div class="relative pl-8 sm:pl-32 py-6 group">
-                <div
-                    class="absolute inset-y-0 left-0 w-1 bg-gray-300 dark:bg-gray-700 rounded-full ml-4 -translate-x-1/2 group-last:hidden">
-                </div>
-                <div
-                    class="absolute w-5 h-5 bg-blue-600 dark:bg-blue-400 rounded-full left-4 -translate-x-1/2 top-1/2 -translate-y-1/2 shadow-lg">
-                </div>
-                <div class="flex flex-col sm:flex-row items-start">
-                    <time
-                        class="sm:absolute left-0 translate-y-0.5 inline-block w-auto sm:w-28 text-sm font-semibold uppercase text-gray-600 dark:text-gray-400 mb-2 sm:mb-0 sm:text-right pr-4">高校時代</time>
-                    <div class="bg-white dark:bg-gray-800 rounded-lg shadow-xl p-6 ml-4 sm:ml-0 flex-1 relative">
-                        <div
-                            class="absolute top-1/2 -left-4 w-4 h-4 bg-white dark:bg-gray-800 transform -translate-y-1/2 rotate-45 hidden sm:block">
+                    <!-- タイムラインのコンテンツ -->
+                    <div class="flex flex-col sm:flex-row items-start">
+                        <time
+                            class="sm:absolute left-0 translate-y-0.5 inline-block w-auto sm:w-28 text-sm font-semibold uppercase text-gray-600 dark:text-gray-400 mb-2 sm:mb-0 sm:text-right pr-4">中学校時代</time>
+                        <div class="bg-white dark:bg-gray-800 rounded-lg shadow-xl p-6 ml-4 sm:ml-0 flex-1 relative">
+                            <div
+                                class="absolute top-1/2 -left-4 w-4 h-4 bg-white dark:bg-gray-800 transform -translate-y-1/2 rotate-45 hidden sm:block">
+                            </div>
+                            <h3 class="text-xl font-bold mb-1">課題発見とデータ分析</h3>
+                            <p class="text-gray-700 dark:text-gray-300">
+                                バス通学の行列に疑問を持ち、学年への自主アンケート調査を実施。課題をデータで可視化する経験を積む。
+                            </p>
                         </div>
-                        <h3 class="text-xl font-bold mb-1">課題解決とリーダーシップ</h3>
-                        <p class="text-gray-700 dark:text-gray-300">
-                            文化祭のまとめ役を3年間務める傍ら、Pythonで「寝台特急サンライズ号」の予約検索システムを開発し、自分の課題を技術で解決。</p>
                     </div>
                 </div>
-            </div>
 
-            <div class="relative pl-8 sm:pl-32 py-6 group">
-                <div
-                    class="absolute inset-y-0 left-0 w-1 bg-gray-300 dark:bg-gray-700 rounded-full ml-4 -translate-x-1/2 group-last:hidden">
-                </div>
-                <div
-                    class="absolute w-5 h-5 bg-blue-600 dark:bg-blue-400 rounded-full left-4 -translate-x-1/2 top-1/2 -translate-y-1/2 shadow-lg">
-                </div>
-                <div class="flex flex-col sm:flex-row items-start">
-                    <time
-                        class="sm:absolute left-0 translate-y-0.5 inline-block w-auto sm:w-28 text-sm font-semibold uppercase text-gray-600 dark:text-gray-400 mb-2 sm:mb-0 sm:text-right pr-4">大学時代
-                        (Now)</time>
-                    <div class="bg-white dark:bg-gray-800 rounded-lg shadow-xl p-6 ml-4 sm:ml-0 flex-1 relative">
-                        <div
-                            class="absolute top-1/2 -left-4 w-4 h-4 bg-white dark:bg-gray-800 transform -translate-y-1/2 rotate-45 hidden sm:block">
+                <div class="relative pl-8 sm:pl-32 py-6 group">
+                    <div
+                        class="absolute inset-y-0 left-0 w-1 bg-gray-300 dark:bg-gray-700 rounded-full ml-4 -translate-x-1/2">
+                    </div>
+                    <div
+                        class="absolute w-5 h-5 bg-blue-600 dark:bg-blue-400 rounded-full left-4 -translate-x-1/2 top-1/2 -translate-y-1/2 shadow-lg">
+                    </div>
+                    <div class="flex flex-col sm:flex-row items-start">
+                        <time
+                            class="sm:absolute left-0 translate-y-0.5 inline-block w-auto sm:w-28 text-sm font-semibold uppercase text-gray-600 dark:text-gray-400 mb-2 sm:mb-0 sm:text-right pr-4">高校時代</time>
+                        <div class="bg-white dark:bg-gray-800 rounded-lg shadow-xl p-6 ml-4 sm:ml-0 flex-1 relative">
+                            <div
+                                class="absolute top-1/2 -left-4 w-4 h-4 bg-white dark:bg-gray-800 transform -translate-y-1/2 rotate-45 hidden sm:block">
+                            </div>
+                            <h3 class="text-xl font-bold mb-1">課題解決とリーダーシップ</h3>
+                            <p class="text-gray-700 dark:text-gray-300">
+                                文化祭のまとめ役を3年間務める傍ら、Pythonで「寝台特急サンライズ号」の予約検索システムを開発し、自分の課題を技術で解決。</p>
                         </div>
-                        <h3 class="text-xl font-bold mb-1">専門性と社会実装</h3>
-                        <p class="text-gray-700 dark:text-gray-300">Life is tech!
-                            メンター（Unity）として教育に携わりつつ、研究会で「交通」ドメインの画像認識（AI）に取り組む。</p>
                     </div>
                 </div>
-            </div>
+
+                <div class="relative pl-8 sm:pl-32 py-6 group">
+                    <div
+                        class="absolute inset-y-0 left-0 w-1 bg-gray-300 dark:bg-gray-700 rounded-full ml-4 -translate-x-1/2">
+                    </div>
+                    <div
+                        class="absolute w-5 h-5 bg-blue-600 dark:bg-blue-400 rounded-full left-4 -translate-x-1/2 top-1/2 -translate-y-1/2 shadow-lg">
+                    </div>
+                    <div class="flex flex-col sm:flex-row items-start">
+                        <time
+                            class="sm:absolute left-0 translate-y-0.5 inline-block w-auto sm:w-28 text-sm font-semibold uppercase text-gray-600 dark:text-gray-400 mb-2 sm:mb-0 sm:text-right pr-4">大学時代
+                            (Now)</time>
+                        <div class="bg-white dark:bg-gray-800 rounded-lg shadow-xl p-6 ml-4 sm:ml-0 flex-1 relative">
+                            <div
+                                class="absolute top-1/2 -left-4 w-4 h-4 bg-white dark:bg-gray-800 transform -translate-y-1/2 rotate-45 hidden sm:block">
+                            </div>
+                            <h3 class="text-xl font-bold mb-1">専門性と社会実装</h3>
+                            <p class="text-gray-700 dark:text-gray-300">Life is tech!
+                                メンター（Unity）として教育に携わりつつ、研究会で「交通」ドメインの画像認識（AI）に取り組む。</p>
+                        </div>
+                    </div>
+                </div>
 
             </div>
         </section>
