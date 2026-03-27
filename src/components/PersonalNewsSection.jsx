@@ -64,7 +64,7 @@ function PersonalNewsSection() {
 
   return (
     <section id="personal-news" className="py-16">
-      <div className="max-w-3xl mx-auto mb-6 px-1 flex items-center justify-between gap-4">
+      <div className="max-w-6xl mx-auto mb-6 px-1 flex items-center justify-between gap-4">
         <h2 className="text-3xl font-bold">Recent Personal News</h2>
         <div className="flex items-center gap-2">
           <button
@@ -85,36 +85,44 @@ function PersonalNewsSection() {
           </button>
         </div>
       </div>
-      <div className="max-w-3xl mx-auto">
+      <div className="max-w-6xl mx-auto">
         <div
           ref={scrollerRef}
-          className="flex gap-4 overflow-x-auto snap-x snap-mandatory pb-4 px-6 md:px-10"
+          className="flex gap-4 overflow-x-auto snap-x snap-proximity pb-4 px-3 md:px-6"
         >
           {personalNewsItems.map((item, index) => (
             <article
               key={`${item.date}-${item.title}`}
               onClick={() => scrollToIndex(index)}
-              className={`min-w-[78%] md:min-w-[70%] snap-center bg-white dark:bg-gray-800 rounded-lg p-6 cursor-pointer transition-all duration-300 ${
+              className={`snap-center bg-white dark:bg-gray-800 rounded-lg cursor-pointer transition-all duration-300 flex items-center ${
                 index === activeIndex
-                  ? 'scale-100 opacity-100 shadow-xl'
-                  : 'scale-95 opacity-70 shadow-md'
+                  ? 'min-w-[58%] md:min-w-[52%] p-6 scale-100 opacity-100 shadow-xl'
+                  : 'min-w-[24%] md:min-w-[22%] p-4 scale-95 opacity-70 shadow-md'
               }`}
             >
-              <p className="text-sm text-gray-500 dark:text-gray-400 mb-2">
-                {item.date}
-              </p>
-              <h3 className="text-xl font-bold mb-2">{item.title}</h3>
-              <p className="text-gray-700 dark:text-gray-300">{item.body}</p>
-              {item.link ? (
-                <a
-                  href={item.link}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="inline-block mt-3 text-blue-600 dark:text-blue-400 hover:underline"
-                >
-                  詳しく見る
-                </a>
-              ) : null}
+              {index === activeIndex ? (
+                <div>
+                  <p className="text-sm text-gray-500 dark:text-gray-400 mb-2">
+                    {item.date}
+                  </p>
+                  <h3 className="text-xl font-bold mb-2">{item.title}</h3>
+                  <p className="text-gray-700 dark:text-gray-300">{item.body}</p>
+                  {item.link ? (
+                    <a
+                      href={item.link}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="inline-block mt-3 text-blue-600 dark:text-blue-400 hover:underline"
+                    >
+                      詳しく見る
+                    </a>
+                  ) : null}
+                </div>
+              ) : (
+                <h3 className="w-full text-sm md:text-base font-semibold text-gray-700 dark:text-gray-200 truncate">
+                  {item.title}
+                </h3>
+              )}
             </article>
           ))}
         </div>
