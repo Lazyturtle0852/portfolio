@@ -1,5 +1,6 @@
 import { useEffect } from 'react'
 import JourneySection from './components/JourneySection'
+import PersonalNewsSection from './components/PersonalNewsSection'
 import ProjectsSection from './components/ProjectsSection'
 import SkillsSection from './components/SkillsSection'
 
@@ -43,6 +44,12 @@ function App() {
               Skills
             </a>
             <a
+              href="#personal-news"
+              className="text-gray-600 dark:text-gray-300 hover:text-blue-600 dark:hover:text-blue-400 transition-colors"
+            >
+              News
+            </a>
+            <a
               href="#contact"
               className="text-gray-600 dark:text-gray-300 hover:text-blue-600 dark:hover:text-blue-400 transition-colors"
             >
@@ -74,11 +81,12 @@ function App() {
         <JourneySection />
         <ProjectsSection />
         <SkillsSection />
+        <PersonalNewsSection />
 
         <section id="contact" className="py-16 text-center">
           <h2 className="text-3xl font-bold mb-8">Contact</h2>
           <p className="text-lg text-gray-700 dark:text-gray-300 mb-8">
-            面白いお話、待ってます。
+
           </p>
           <div className="flex justify-center space-x-6">
             <a href="https://github.com/Lazyturtle0852" target="_blank" rel="noopener noreferrer" className="text-gray-600 dark:text-gray-400 hover:text-blue-600 dark:hover:text-blue-400 transition-colors">
