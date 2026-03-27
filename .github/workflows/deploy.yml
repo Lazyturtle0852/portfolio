@@ -13,7 +13,23 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v4
 
-      # 2. ★★★ これがホストキー確認（1分ハングアップ）問題を解決します ★★★
+      # 2. Node.jsをセットアップ
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+
+      # 3. Reactアプリをビルド（lint + build）
+      - name: Install dependencies
+        run: npm install
+
+      - name: Lint
+        run: npm run lint
+
+      - name: Build
+        run: npm run build
+
+      # 4. ★★★ これがホストキー確認（1分ハングアップ）問題を解決します ★★★
       # KNOWN_HOSTSシークレットを使って、サーバーの指紋を登録する
       - name: Create known_hosts
         run: |
@@ -22,7 +38,7 @@ jobs:
           chmod 600 ~/.ssh/known_hosts
       # ★★★★★★★★★★★★★★★★★★
 
-      # 3. rsync (高機能なファイル転送) を使ってサーバーにデプロイします
+      # 5. rsync (高機能なファイル転送) を使ってサーバーにデプロイします
       - name: Deploy to server with rsync
         uses: burnett01/rsync-deployments@7.1.0
         with:
@@ -33,8 +49,8 @@ jobs:
           # rsh: "ssh -o StrictHostKeyChecking=no"  <--- ★★★ この行は削除しました ★★★
           # 
           
-          # 転送元のファイル ( '.' はリポジトリ全体)
-          path: .
+          # 転送元のファイル (ビルド成果物のみ)
+          path: dist/
           
           # 転送先サーバーのパス
           remote_path: /var/www/html/
