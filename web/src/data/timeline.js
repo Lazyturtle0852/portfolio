@@ -7,7 +7,7 @@ export const timelineItems = [
   {
     period: '中学校時代',
     title: '身近な問題解決とデータ分析',
-    body: 'バス通学の長い行列に疑問を持ち、学年への自主アンケート調査を実施。課題をデータで可視化する経験を積む。',
+    body: 'バス通学の長い行列に疑問を持ち、学年への自主アンケート調査を実施。他にもNotionをはじめとするノーコードツールを活用。',
   },
   {
     period: '高校時代',
@@ -17,6 +17,6 @@ export const timelineItems = [
   {
     period: '大学時代 (Now)',
     title: '専門性と社会実装',
-    body: 'Life is tech! メンター（Unity）として教育に携わりつつ、研究会で「交通」ドメインの画像認識プロジェクトに取り組む。',
+    body: 'Life is tech! メンター（Unity/Web Service）として教育に携わりつつ、研究会で「交通」ドメインの画像認識プロジェクトに取り組む。',
   },
 ]
