@@ -23,4 +23,11 @@ export const personalNewsItems = [
     link: 'https://42tokyo.jp/landing/autonomous-minicar-battle/',
     image: news3,
   },
+  {
+    date: '2026-04-09',
+    title: 'お世話になっていた会社を離れました',
+    body: '学業に力を入れたい・色々な経験を積みたいなどの理由から、約5ヶ月間エンジニアとして働かせていただいた株式会社Kiyonoをこの度離れ、別の環境に身を置くこととなりました。これまで大変お世話になりました!これからも頑張っていきます。',
+    link: 'kiyono-co.jp',
+    image: "/assets/images/turtle-icon.jpeg",
+  },
 ]
