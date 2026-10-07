@@ -2,7 +2,6 @@
 
 たーとるのポートフォリオサイト。[Astro](https://astro.build) + Tailwind CSS v4 で作っています。
 `main` に push すると GitHub Actions でビルドされ、サーバーへ rsync でデプロイされます。
-`feature/astro` に push すると、プレビューが GitHub Pages（https://lazyturtle0852.github.io/portfolio/ ）に出ます（noindex 付き）。
 
 ## 開発
 

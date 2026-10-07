@@ -17,6 +17,6 @@ export const timelineItems: { era: Era; period: string; title: string; body: str
     era: 'university',
     period: '大学 (Now)',
     title: '技術を社会に届ける',
-    body: 'SFC で ICAR とたくみ研を掛け持ちし、交通 × 画像認識の研究と、技術が社会に根付くための組織を考えている。AI スタートアップ ARCRA ではエンジニアとして働く。キャンパスの Wi-Fi で友達の在校がわかるアプリ COKOYO も公開。',
+    body: 'SFC で ICAR とたくみ研を掛け持ちし、首都高の位置をカメラ映像から特定する研究（VPR）と、技術が社会に根付くための組織を考えている。AI スタートアップ ARCRA ではエンジニアとして働く。キャンパスの Wi-Fi で友達の在校がわかるアプリ COKOYO も公開。',
   },
 ]

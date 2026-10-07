@@ -9,8 +9,6 @@ interface Props {
 
 const { title, description } = Astro.props
 const ogImage = new URL(turtleIcon.src, Astro.site)
-// GitHub Pages のプレビューは検索に載せない
-const isPreview = import.meta.env.PUBLIC_PREVIEW === 'true'
 ---
 
 <!doctype html>
@@ -28,7 +26,6 @@ const isPreview = import.meta.env.PUBLIC_PREVIEW === 'true'
     <meta property="og:site_name" content="たーとるのポートフォリオ" />
     <meta name="twitter:card" content="summary" />
     <link rel="icon" href={turtleIcon.src} type="image/jpeg" />
-    {isPreview && <meta name="robots" content="noindex, nofollow" />}
     <!-- Google Fonts (Inter + Noto Sans JP) -->
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
