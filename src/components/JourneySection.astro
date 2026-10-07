@@ -3,30 +3,30 @@ import { Image } from 'astro:assets'
 import { activities, works } from '../data/projects'
 import { timelineItems } from '../data/timeline'
 
-// 各時代の写真。押すと Works / Activities の該当カードへ飛ぶ
-const thumbsByEra = timelineItems.map((item) => [
-  ...works
+// 各時代の写真。押すと Works / Activities の該当カードへ飛ぶ。
+// スマホでは先頭の3枚だけ出すので、Works と Activities を交互に並べる
+const thumbsByEra = timelineItems.map((item) => {
+  const fromWorks = works
     .filter((work) => work.era === item.era && work.journey !== false)
-    .map((work) => ({ href: `#work-${work.id}`, title: work.title, image: work.image })),
-  ...activities
+    .map((work) => ({ href: `#work-${work.id}`, title: work.title, image: work.image }))
+  const fromActivities = activities
     .filter((activity) => activity.era === item.era && activity.image && activity.journey !== false)
     .map((activity) => ({
       href: `#activity-${activity.id}`,
       title: activity.title,
       image: activity.image!,
-    })),
-])
+    }))
+  const length = Math.max(fromWorks.length, fromActivities.length)
+  return Array.from({ length }, (_, k) => [fromWorks[k], fromActivities[k]])
+    .flat()
+    .filter((thumb) => thumb !== undefined)
+})
 
 // PC では写真を右・左・右…と交互に、カード列の外側の余白へ置く。
 // 縦位置は下のスクリプトで、各時代の行の高さに合わせて重ならないよう決める
 const gutterThumbs = thumbsByEra.flatMap((thumbs, row) => thumbs.map((thumb) => ({ ...thumb, row })))
-// x は列の端からの距離、size は一辺（px）。1280px 幅でも収まるよう x + size は 220 以下
-const gutterLooks = [
-  { x: 40, size: 128 },
-  { x: 84, size: 112 },
-  { x: 28, size: 120 },
-  { x: 96, size: 108 },
-]
+// 一辺の大きさ（px）。横位置は下のスクリプトで余白の幅に合わせて決める
+const gutterLooks = [{ size: 128 }, { size: 112 }, { size: 120 }, { size: 108 }]
 
 // PC 以外では最大3枚を、スマホは時代ラベルの行の右に横一列、タブレットはカードの右に2列で置く。
 // どちらも行の高さを増やさないよう、空いている場所に置く
@@ -85,13 +85,14 @@ const gutterLooks = [
       {
         gutterThumbs.map((thumb, j) => {
           const look = gutterLooks[Math.floor(j / 2) % gutterLooks.length]
-          const prop = j % 2 === 0 ? 'left' : 'right'
+          const side = j % 2 === 0 ? 'right' : 'left'
           return (
             <li
               class="float-thumb absolute pointer-events-auto"
               data-row={thumb.row}
-              data-side={prop}
-              style={`${prop}: calc(100% + ${look.x}px * var(--gap-scale)); width: calc(${look.size}px * var(--size-scale)); --size: calc(${look.size}px * var(--size-scale)); --delay: ${-j * 1.3}s`}
+              data-side={side}
+              data-size={look.size}
+              style={`width: ${look.size}px; --size: ${look.size}px; --delay: ${-j * 1.3}s`}
             >
               <a href={thumb.href} title={thumb.title} class="float-thumb__card">
                 <Image
@@ -112,46 +113,75 @@ const gutterLooks = [
 
 <script>
   // 写真を各時代の行の横に置き、同じ側で重ならないよう上下にずらす。
-  // 行の高さは写真に左右されないので、カード同士の間隔は等しいまま
+  // 行の高さは写真に左右されないので、カード同士の間隔は等しいまま。
+  // 余白が広ければ各側に2本の列をつくり、空いているほうへ入れる
   const GAP = 24
+  const EDGE = 16
+  const JITTER = [0, 18, 6, 26, 10]
+  // 2本目の列は少し下げて、横に並んで見えないようにする
+  const LANE_DROP = 44
+  // 最後のカードの下にはみ出してよい量
+  const TAIL = 160
+
+  // scale 倍の大きさで並べ、いちばん下の写真の下端を返す
+  function place(wrapper: HTMLElement, gutter: HTMLElement, scale: number) {
+    const rows = [...wrapper.querySelectorAll<HTMLElement>('[data-journey-row]')]
+    const gutterWidth = (document.documentElement.clientWidth - wrapper.offsetWidth) / 2
+    let lowest = 0
+
+    for (const side of ['left', 'right']) {
+      const items = [...gutter.querySelectorAll<HTMLElement>(`li[data-side="${side}"]:not([hidden])`)].map((li) => ({
+        li,
+        size: Math.round(Number(li.dataset.size) * scale),
+      }))
+      const maxSize = Math.max(0, ...items.map((item) => item.size))
+      const laneCount = gutterWidth >= maxSize * 2 + EDGE * 3 + 24 ? 2 : 1
+      const laneBottoms = Array<number>(laneCount).fill(-Infinity)
+
+      items.forEach(({ li, size }, k) => {
+        const row = rows[Number(li.dataset.row)]
+        // 自分の時代の行の中央に置きたい。入る列のうち、いちばん上に置ける列を選ぶ
+        const want = row.offsetTop + row.offsetHeight / 2 - size / 2
+        const tops = laneBottoms.map((bottom, lane) => Math.max(want + lane * LANE_DROP, bottom + GAP, 0))
+        const lane = tops.indexOf(Math.min(...tops))
+        const jitter = JITTER[k % JITTER.length]
+        const x = lane === 0 ? EDGE + jitter : gutterWidth - size - EDGE - jitter
+        li.style.left = li.style.right = ''
+        li.style[side === 'right' ? 'left' : 'right'] = `calc(100% + ${Math.max(EDGE, x)}px)`
+        li.style.top = `${tops[lane]}px`
+        li.style.width = `${size}px`
+        li.style.setProperty('--size', `${size}px`)
+        laneBottoms[lane] = tops[lane] + size
+        lowest = Math.max(lowest, laneBottoms[lane])
+      })
+    }
+    return lowest
+  }
 
   function layout(wrapper: HTMLElement) {
     const gutter = wrapper.querySelector<HTMLElement>('.journey-gutter')
     if (!gutter || getComputedStyle(gutter).display === 'none') return
-    const rows = [...wrapper.querySelectorAll<HTMLElement>('[data-journey-row]')]
-    const lastRow = rows[rows.length - 1]
-    const end = lastRow.offsetTop + lastRow.offsetHeight
-    let lowest = 0
-
-    for (const side of ['left', 'right']) {
-      const items = [...gutter.querySelectorAll<HTMLElement>(`li[data-side="${side}"]`)].map((li) => {
-        const row = rows[Number(li.dataset.row)]
-        // まずは自分の時代の行の中央に置きたい
-        const want = row.offsetTop + row.offsetHeight / 2 - li.offsetHeight / 2
-        return { li, h: li.offsetHeight, top: want }
-      })
-      // 上から順に、前の写真と重ならない位置まで下げる
-      let bottom = -Infinity
-      for (const item of items) {
-        item.top = Math.max(item.top, bottom + GAP, 0)
-        bottom = item.top + item.h
-      }
-      // 下にはみ出すぶんは、上の空いている余白へ詰め直す
-      let limit = end
-      for (const item of items.toReversed()) {
-        item.top = Math.max(0, Math.min(item.top, limit - item.h))
-        limit = item.top - GAP
-      }
-      bottom = -Infinity
-      for (const item of items) {
-        item.top = Math.max(item.top, bottom + GAP)
-        bottom = item.top + item.h
-        item.li.style.top = `${item.top}px`
-      }
-      lowest = Math.max(lowest, bottom)
+    const all = [...gutter.querySelectorAll<HTMLElement>('li[data-row]')]
+    for (const li of all) li.hidden = false
+    const end = wrapper.offsetHeight
+    // 最後のカードより下へ大きくはみ出すなら、まず少し小さくする（0.85 倍まで）
+    let scale = 1
+    let lowest = place(wrapper, gutter, scale)
+    while (lowest > end + TAIL && scale > 0.85) {
+      scale -= 0.05
+      lowest = place(wrapper, gutter, scale)
     }
-    // それでも最後のカードより下まで続くぶん、次のセクションとの間をあける
-    wrapper.style.paddingBottom = `${Math.max(0, lowest - wrapper.offsetHeight + 16)}px`
+    // それでも入らなければ、写真の多い時代から後ろの写真を減らす（Works などには残る）
+    while (lowest > end + TAIL) {
+      const visible = all.filter((li) => !li.hidden)
+      const counts = new Map<string, number>()
+      for (const li of visible) counts.set(li.dataset.row!, (counts.get(li.dataset.row!) ?? 0) + 1)
+      const [busiest, count] = [...counts].sort((a, b) => b[1] - a[1])[0] ?? []
+      if (!busiest || count <= 1) break
+      visible.findLast((li) => li.dataset.row === busiest)!.hidden = true
+      lowest = place(wrapper, gutter, scale)
+    }
+    wrapper.style.paddingBottom = `${Math.max(0, lowest - end + 16)}px`
     gutter.classList.add('is-ready')
   }
 

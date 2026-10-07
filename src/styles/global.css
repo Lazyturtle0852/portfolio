@@ -49,9 +49,6 @@ html {
 
 /* 位置が決まるまで見せない（決まったらふわっと出す） */
 .journey-gutter {
-  /* 1024〜1280px は余白が狭いので、写真を小さめ・列寄りにする */
-  --size-scale: 0.78;
-  --gap-scale: 0.45;
   opacity: 0;
   transition: opacity 0.4s;
 }
@@ -60,12 +57,6 @@ html {
   opacity: 1;
 }
 
-@media (min-width: 80rem) {
-  .journey-gutter {
-    --size-scale: 1;
-    --gap-scale: 1;
-  }
-}
 
 .float-thumb__img {
   width: var(--size, 140px);

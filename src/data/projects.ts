@@ -9,6 +9,8 @@ import quizletSite from '../assets/images/screenshot-2025-10-28-133526.png'
 import busData from '../assets/images/bus_data.png'
 import minicar from '../assets/images/news3.png'
 import portfolioSite from '../assets/images/news1.png'
+import cokoyoIcon from '../assets/images/cokoyo-icon.png'
+import takumilab from '../assets/images/takumilab.jpg'
 import type { ImageMetadata } from 'astro'
 import type { Era } from './timeline'
 
@@ -77,6 +79,9 @@ export const activities: Activity[] = [
     role: '研究',
     period: '2026年〜',
     era: 'university',
+    image: takumilab,
+    alt: '池の向こうに見える SFC キャンパスの校舎',
+    imageClassName: 'object-cover',
     link: { href: 'https://takumilab.sfc.keio.ac.jp/', label: '研究室のページ' },
     description:
       '「どうすれば技術が社会に役立つか」「どうすれば組織が技術を生み出せるか」を、組織の側から考える研究室です。ICAR と掛け持ちで、技術と組織の両面から社会実装を探っています。',
@@ -105,7 +110,6 @@ export const activities: Activity[] = [
   },
   {
     id: 'sfc-clip',
-    journey: false,
     title: 'SFC CLIP',
     role: '記者・開発',
     period: '2025年〜',
@@ -144,6 +148,23 @@ export const activities: Activity[] = [
 // 新しい順
 export const works: Work[] = [
   {
+    id: 'cokoyo',
+    title: 'COKOYO',
+    period: '2026年10月',
+    era: 'university',
+    image: cokoyoIcon,
+    alt: 'COKOYO のアイコン（オレンジ地のスライム）',
+    imageClassName: 'object-contain bg-[#ea580c]',
+    link: { href: 'https://cokoyo.lazyta-toru.net/', label: 'アプリを開く' },
+    description:
+      'フレンドがいまキャンパスにいるかを、ボタンひとつで確かめられる SFC 生向けの Web アプリです。GPS は使わず、SFC Digital Twin API でキャンパスの Wi-Fi につながっているかだけを見ます。見せる範囲は相手ごとに選べて、いつでも隠れられます。',
+    tags: [
+      { label: '#Web', tone: 'blue' },
+      { label: '#デジタルツイン', tone: 'gray' },
+      { label: '#プライバシー', tone: 'gray' },
+    ],
+  },
+  {
     id: 'minicar-battle',
     title: '自動運転ミニカーバトル',
     period: '2026年3月',
@@ -162,7 +183,6 @@ export const works: Work[] = [
   },
   {
     id: 'portfolio',
-    journey: false,
     title: 'このポートフォリオサイト',
     period: '2025年〜',
     era: 'university',
