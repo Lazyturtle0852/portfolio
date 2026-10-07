@@ -1,0 +1,62 @@
+---
+import { Image } from 'astro:assets'
+import { getCollection, render } from 'astro:content'
+
+// 新しい順。同じ日付はファイル名の降順で並べる
+const newsItems = (await getCollection('news')).sort(
+  (a, b) => b.data.date.getTime() - a.data.date.getTime() || b.id.localeCompare(a.id),
+)
+
+const formatDate = (date: Date) => date.toISOString().slice(0, 10)
+---
+
+<section id="personal-news" class="py-16">
+  <div class="max-w-6xl mx-auto px-1 mb-6">
+    <h2 class="text-3xl font-bold">Recent Personal News</h2>
+  </div>
+  <div class="max-w-6xl mx-auto">
+    <div class="flex gap-4 overflow-x-auto snap-x snap-mandatory pb-4 px-1">
+      {
+        newsItems.map(async (item) => {
+          const { Content } = await render(item)
+          return (
+            <article class="w-72 lg:w-[calc((100%-2rem)/3)] h-[24rem] shrink-0 snap-start bg-white dark:bg-gray-800 rounded-lg shadow-md overflow-hidden">
+              {item.data.image ? (
+                <Image
+                  src={item.data.image}
+                  alt=""
+                  width={600}
+                  class="w-full h-1/2 object-cover"
+                />
+              ) : (
+                <div class="w-full h-1/2 bg-gray-200 dark:bg-gray-700" />
+              )}
+              <div class="h-1/2 p-3 overflow-hidden">
+                <time
+                  datetime={formatDate(item.data.date)}
+                  class="block text-xs text-gray-500 dark:text-gray-400 mb-1"
+                >
+                  {formatDate(item.data.date)}
+                </time>
+                <h3 class="text-sm font-bold mb-1">{item.data.title}</h3>
+                <div class="text-gray-700 dark:text-gray-300 text-xs line-clamp-4">
+                  <Content />
+                </div>
+                {item.data.link ? (
+                  <a
+                    href={item.data.link}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    class="inline-block mt-3 text-blue-600 dark:text-blue-400 hover:underline text-sm"
+                  >
+                    詳しく見る
+                  </a>
+                ) : null}
+              </div>
+            </article>
+          )
+        })
+      }
+    </div>
+  </div>
+</section>

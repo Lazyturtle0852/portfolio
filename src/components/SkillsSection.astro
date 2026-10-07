@@ -1,0 +1,35 @@
+---
+import SkillIcon from './SkillIcon.astro'
+import { skills } from '../data/skills'
+
+function isImageLink(value: string) {
+  return value.startsWith('/') || value.startsWith('http')
+}
+---
+
+<section id="skills" class="py-16 bg-gray-50 dark:bg-gray-800">
+  <div class="container mx-auto px-6">
+    <h2 class="text-3xl font-bold text-center mb-12">Skills</h2>
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+      {
+        skills.map((skill) => (
+          <div class="bg-white dark:bg-gray-900 p-6 rounded-lg shadow-lg transform hover:scale-105 transition-transform duration-300">
+            <div class="flex items-center mb-4">
+              {isImageLink(skill.iconlink) ? (
+                <img
+                  src={skill.iconlink}
+                  alt=""
+                  class="w-10 h-10 rounded-md object-cover mr-4"
+                />
+              ) : (
+                <SkillIcon icon={skill.iconlink} />
+              )}
+              <h3 class="text-2xl font-bold">{skill.title}</h3>
+            </div>
+            <p class="text-gray-700 dark:text-gray-300">{skill.body}</p>
+          </div>
+        ))
+      }
+    </div>
+  </div>
+</section>

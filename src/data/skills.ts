@@ -1,4 +1,11 @@
-export const skills = [
+export type Skill = {
+  title: string
+  /** SkillIcon のアイコン名、または画像の URL */
+  iconlink: string
+  body: string
+}
+
+export const skills: Skill[] = [
   {
     title: '語学',
     iconlink: 'globe',

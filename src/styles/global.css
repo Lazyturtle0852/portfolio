@@ -8,4 +8,6 @@ body {
 
 html {
   scroll-behavior: smooth;
+  /* sticky ヘッダーに見出しが隠れないようにする */
+  scroll-padding-top: 6rem;
 }

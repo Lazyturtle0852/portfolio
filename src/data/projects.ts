@@ -1,9 +1,34 @@
-export const projects = [
+import lifeIsTech from '../assets/images/Day1_59.jpg'
+import haitatsuGame from '../assets/images/screenshot-2025-10-16-151931.png'
+import icarResearch from '../assets/images/screenshot-2025-05-24-conf077.jpg'
+import sfcClipLogo from '../assets/images/sfcclip-logo.png'
+import bikeTrip from '../assets/images/186321.jpg'
+import sleeperTrain from '../assets/images/screenshot-2025-10-28-131800.png'
+import tennisDb from '../assets/images/screenshot-2025-10-28-134020.png'
+import quizletSite from '../assets/images/screenshot-2025-10-28-133526.png'
+import busData from '../assets/images/bus_data.png'
+import type { ImageMetadata } from 'astro'
+
+type TagTone = 'pink' | 'gray' | 'purple' | 'green' | 'blue'
+
+export type Project = {
+  title: string
+  period: string
+  image: ImageMetadata
+  alt: string
+  imageClassName: string
+  imageStyle?: string
+  link?: { href: string; label: string }
+  description: string
+  tags: { label: string; tone: TagTone }[]
+}
+
+export const projects: Project[] = [
   {
     title: 'Life is Tech!',
     period: '大学',
-    image: '/assets/images/Day1_59.jpg',
-    alt: 'チームワーク',
+    image: lifeIsTech,
+    alt: 'Life is Tech! サマーキャンプで発表するメンター',
     imageClassName: 'h-56 w-full object-cover object-top',
     link: {
       href: 'https://life-is-tech.com/',
@@ -20,8 +45,8 @@ export const projects = [
   {
     title: 'Unityによるゲーム開発',
     period: '大学',
-    image: '/assets/images/screenshot-2025-10-16-151931.png',
-    alt: 'チームワーク',
+    image: haitatsuGame,
+    alt: '「絶対に定時配達カンパニー」のゲーム画面',
     imageClassName: 'h-56 w-full object-cover object-top',
     link: {
       href: 'https://unityroom.com/games/haitatsu_615',
@@ -38,8 +63,8 @@ export const projects = [
   {
     title: '交通×ITの研究',
     period: '大学 (現在)',
-    image: '/assets/images/screenshot-2025-05-24-conf077.jpg',
-    alt: '画像認識',
+    image: icarResearch,
+    alt: '首都高の標識を画像認識で検出した車載カメラ映像',
     imageClassName: 'h-56 w-full object-cover',
     link: {
       href: 'https://icar.sfc.wide.ad.jp/',
@@ -56,8 +81,8 @@ export const projects = [
   {
     title: 'SFC CLIP',
     period: '大学',
-    image: '/assets/images/sfcclip-logo.png',
-    alt: 'チームワーク',
+    image: sfcClipLogo,
+    alt: 'SFC CLIP のロゴ',
     imageClassName: 'h-56 w-full object-contain',
     link: {
       href: 'https://sfcclip.net',
@@ -74,10 +99,10 @@ export const projects = [
   {
     title: '自転車旅',
     period: '高校~',
-    image: '/assets/images/186321.jpg',
-    alt: 'チームワーク',
+    image: bikeTrip,
+    alt: '海沿いのガードレールに立てかけた2台のロードバイク',
     imageClassName: 'h-56 w-full object-cover object-top',
-    imageStyle: { objectPosition: '50% 25%' },
+    imageStyle: 'object-position: 50% 25%',
     link: {
       href: 'https://www.strava.com/athletes/116006611',
       label: 'Strava プロフィール',
@@ -93,8 +118,8 @@ export const projects = [
   {
     title: '寝台特急 予約検索システム',
     period: '高校時代',
-    image: '/assets/images/screenshot-2025-10-28-131800.png',
-    alt: '寝台特急',
+    image: sleeperTrain,
+    alt: '寝台特急の空席検索ツールの画面',
     imageClassName: 'h-56 w-full object-cover',
     link: {
       href: 'https://colab.research.google.com/drive/1UnzmVwHmPpwAMPcihR4Rl3u-JPQMjNUG?usp=sharing',
@@ -111,8 +136,8 @@ export const projects = [
   {
     title: '戦績データベースの構築・運用',
     period: '高校時代',
-    image: '/assets/images/screenshot-2025-10-28-134020.png',
-    alt: 'チームワーク',
+    image: tennisDb,
+    alt: 'テニス部の戦績データベース',
     imageClassName: 'h-56 w-full object-cover object-top',
     description:
       '中高6年間所属したテニス部の戦績管理を効率化するため、Notionでデータベースを構築し、部員全員が簡単に利用できるようにしました。',
@@ -125,8 +150,8 @@ export const projects = [
   {
     title: '学習のサポート',
     period: '高校時代',
-    image: '/assets/images/screenshot-2025-10-28-133526.png',
-    alt: 'チームワーク',
+    image: quizletSite,
+    alt: 'クイズレットまとめサイトの画面',
     imageClassName: 'h-56 w-full object-cover object-top',
     description:
       '学内で暗記アプリ「クイズレット」のまとめサイトを制作し、利他的精神に基づく助け合いのエコシステムを構築しました。3年間を通して150を超えるセットを制作。',
@@ -139,7 +164,7 @@ export const projects = [
   {
     title: 'バス混雑の課題分析',
     period: '中学校時代',
-    image: '/assets/images/bus_data.png',
+    image: busData,
     alt: 'バス列の分析データグラフ',
     imageClassName: 'h-56 w-full object-cover',
     description:
