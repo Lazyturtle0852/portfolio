@@ -89,3 +89,49 @@ html {
     animation: none;
   }
 }
+
+/* ヒーローの亀：裏返すとエクアドルの写真 */
+.turtle-flip {
+  perspective: 900px;
+}
+
+.turtle-flip__card {
+  transform-style: preserve-3d;
+  transition: transform 0.6s cubic-bezier(0.3, 0.7, 0.3, 1);
+  -webkit-user-select: none;
+  user-select: none;
+}
+
+.turtle-flip__face {
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
+  pointer-events: none;
+}
+
+.turtle-flip__back {
+  transform: rotateY(180deg);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .turtle-flip__card {
+    transition: none;
+  }
+}
+
+/* 名前の切り替えは、ふわっと入れ替える */
+.flip-name > span:not([hidden]) {
+  animation: flip-name 0.5s ease-out;
+}
+
+@keyframes flip-name {
+  from {
+    opacity: 0;
+    transform: translateY(0.15em);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .flip-name > span:not([hidden]) {
+    animation: none;
+  }
+}

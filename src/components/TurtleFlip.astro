@@ -1,0 +1,86 @@
+---
+import { Image } from 'astro:assets'
+import turtleIcon from '../assets/images/turtle-icon.jpeg'
+import ecuadorTurtle from '../assets/images/ecuador-turtle.jpg'
+---
+
+<!-- 亀のアイコン。横にスワイプ（またはタップ）すると裏返って、エクアドルでの写真が出る -->
+<div class="turtle-flip mx-auto mb-6 w-60 h-60" data-turtle-flip>
+  <button
+    type="button"
+    class="turtle-flip__card relative block w-full h-full rounded-full cursor-grab active:cursor-grabbing touch-pan-y focus-visible:outline-4 focus-visible:outline-blue-500 focus-visible:outline-offset-4"
+    aria-label="アイコンを裏返す"
+    aria-pressed="false"
+  >
+    <Image
+      class="turtle-flip__face absolute inset-0 w-full h-full rounded-full object-cover"
+      src={turtleIcon}
+      alt="たーとるのアイコン（亀のイラスト）"
+      width={480}
+      height={480}
+      loading="eager"
+      draggable="false"
+    />
+    <Image
+      class="turtle-flip__face turtle-flip__back absolute inset-0 w-full h-full rounded-full object-cover"
+      src={ecuadorTurtle}
+      alt="エクアドルの赤道記念碑の前でジャンプするたーとる"
+      width={480}
+      draggable="false"
+    />
+  </button>
+</div>
+
+<script>
+  // 指（マウス）の動きに少しついてきて、離したら表か裏にぱたんと倒れる
+  const SWIPE = 40
+
+  for (const root of document.querySelectorAll<HTMLElement>('[data-turtle-flip]')) {
+    const card = root.querySelector<HTMLButtonElement>('.turtle-flip__card')!
+    let flipped = false
+    let startX: number | null = null
+    let dragged = false
+
+    const show = (angle: number, animate: boolean) => {
+      card.style.transition = animate ? '' : 'none'
+      card.style.transform = `rotateY(${angle}deg)`
+    }
+    const settle = (next: boolean) => {
+      flipped = next
+      card.setAttribute('aria-pressed', String(flipped))
+      show(flipped ? 180 : 0, true)
+      // 見出しの名前も、表はハンドルネーム・裏は本名に切り替える
+      for (const el of document.querySelectorAll<HTMLElement>('[data-flip-front]')) el.hidden = flipped
+      for (const el of document.querySelectorAll<HTMLElement>('[data-flip-back]')) el.hidden = !flipped
+    }
+
+    card.addEventListener('pointerdown', (event) => {
+      startX = event.clientX
+      dragged = false
+      card.setPointerCapture(event.pointerId)
+    })
+    card.addEventListener('pointermove', (event) => {
+      if (startX === null) return
+      const dx = event.clientX - startX
+      if (Math.abs(dx) > 4) dragged = true
+      if (dragged) show((flipped ? 180 : 0) + Math.max(-90, Math.min(90, dx * 0.6)), false)
+    })
+    const end = (event: PointerEvent) => {
+      if (startX === null) return
+      const dx = event.clientX - startX
+      startX = null
+      if (!dragged) return
+      settle(Math.abs(dx) >= SWIPE ? !flipped : flipped)
+    }
+    card.addEventListener('pointerup', end)
+    card.addEventListener('pointercancel', end)
+    // タップ・クリック・キーボードでも裏返せる（ドラッグの直後は除く）
+    card.addEventListener('click', () => {
+      if (dragged) {
+        dragged = false
+        return
+      }
+      settle(!flipped)
+    })
+  }
+</script>

@@ -1,23 +1,17 @@
-export type Era = 'elementary' | 'junior-high' | 'high-school' | 'university'
+export type Era = 'childhood' | 'secondary' | 'university'
 
 export const timelineItems: { era: Era; period: string; title: string; body: string }[] = [
   {
-    era: 'elementary',
-    period: '小学校',
-    title: 'テクノロジーとの出会い',
-    body: 'インドネシアのインターナショナルスクールに通い、一人一台配られた PC でテクノロジーの面白さに目覚める。',
+    era: 'childhood',
+    period: '小・中学校',
+    title: 'インドネシアで、テクノロジーと出会う',
+    body: '小中学校時代をインドネシアで過ごす。インターナショナルスクールで一人一台配られた PC でテクノロジーの面白さに目覚め、現地で見た交通事情が、のちに交通に関心を持つきっかけになる。',
   },
   {
-    era: 'junior-high',
-    period: '中学校',
-    title: '身近な問題をデータで見る',
-    body: '通学バスの行列に疑問を持ち、学年アンケートで分析。Notion などのノーコードツールにも触れはじめる。',
-  },
-  {
-    era: 'high-school',
-    period: '高校',
-    title: '自分の課題を技術で解く',
-    body: '文化祭のクラス責任者を3年間務めながら、Python で寝台特急の空席検索ツールを作る。自転車旅もこの頃から。',
+    era: 'secondary',
+    period: '中学・高校',
+    title: '身近な課題を、テクノロジーで解く',
+    body: '通学バスの行列をアンケートで分析したり、テニス部の戦績データベースや学年の暗記セットのまとめサイト、寝台特急の空席検索ツールを作ったり。文化祭のクラス責任者を3年間務め、自転車旅もはじめる。',
   },
   {
     era: 'university',
