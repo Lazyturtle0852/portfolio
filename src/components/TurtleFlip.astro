@@ -35,12 +35,16 @@ import ecuadorTurtle from '../assets/images/ecuador-turtle.jpg'
 <script>
   // 指（マウス）の動きに少しついてきて、離したら表か裏にぱたんと倒れる
   const SWIPE = 40
+  // ページを開いてしばらくしたら、一度だけ自動で裏返す
+  const AUTO_FLIP_MS = 8000
 
   for (const root of document.querySelectorAll<HTMLElement>('[data-turtle-flip]')) {
     const card = root.querySelector<HTMLButtonElement>('.turtle-flip__card')!
     let flipped = false
     let startX: number | null = null
     let dragged = false
+    let touched = false
+    let visible = true
 
     const show = (angle: number, animate: boolean) => {
       card.style.transition = animate ? '' : 'none'
@@ -56,6 +60,7 @@ import ecuadorTurtle from '../assets/images/ecuador-turtle.jpg'
     }
 
     card.addEventListener('pointerdown', (event) => {
+      touched = true
       startX = event.clientX
       dragged = false
       card.setPointerCapture(event.pointerId)
@@ -77,11 +82,20 @@ import ecuadorTurtle from '../assets/images/ecuador-turtle.jpg'
     card.addEventListener('pointercancel', end)
     // タップ・クリック・キーボードでも裏返せる（ドラッグの直後は除く）
     card.addEventListener('click', () => {
+      touched = true
       if (dragged) {
         dragged = false
         return
       }
       settle(!flipped)
     })
+
+    // 自分で触っていたり、亀が画面に見えていなかったりしたら自動では裏返さない
+    new IntersectionObserver(([entry]) => {
+      visible = entry.isIntersecting
+    }).observe(card)
+    setTimeout(() => {
+      if (!touched && visible && !flipped) settle(true)
+    }, AUTO_FLIP_MS)
   }
 </script>
