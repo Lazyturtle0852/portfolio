@@ -66,7 +66,7 @@ export const activities: Activity[] = [
     imageClassName: 'object-cover',
     link: { href: 'https://icar.sfc.wide.ad.jp/', label: '研究グループのページ' },
     description:
-      '村井純研究室の研究グループで、首都高との共同研究に参加しています。走行中の車載カメラ映像から道路を識別する、画像認識 AI モデルを作っています。',
+      '植原啓介合同研究室の研究グループで、首都高との共同研究に参加しています。走行中の車載カメラ映像から道路を識別し、位置まで特定する画像認識 AI モデルを作っています。',
     tags: [
       { label: '#画像認識', tone: 'purple' },
       { label: '#交通', tone: 'gray' },
