@@ -47,6 +47,16 @@ html {
   outline-color: var(--color-blue-500);
 }
 
+/* 位置が決まるまで見せない（決まったらふわっと出す） */
+.journey-gutter {
+  opacity: 0;
+  transition: opacity 0.4s;
+}
+
+.journey-gutter.is-ready {
+  opacity: 1;
+}
+
 .float-thumb__img {
   width: var(--size, 140px);
   height: var(--size, 140px);
