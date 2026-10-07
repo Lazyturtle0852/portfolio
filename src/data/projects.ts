@@ -20,6 +20,8 @@ type Link = { href: string; label: string }
 /** いま所属している・続けている活動 */
 export type Activity = {
   id: string
+  /** false にすると Journey の写真に出さない */
+  journey?: boolean
   title: string
   role: string
   period: string
@@ -36,6 +38,8 @@ export type Activity = {
 /** 作ったもの・挑戦したこと */
 export type Work = {
   id: string
+  /** false にすると Journey の写真に出さない */
+  journey?: boolean
   title: string
   period: string
   era: Era
@@ -101,6 +105,7 @@ export const activities: Activity[] = [
   },
   {
     id: 'sfc-clip',
+    journey: false,
     title: 'SFC CLIP',
     role: '記者・開発',
     period: '2025年〜',
@@ -157,6 +162,7 @@ export const works: Work[] = [
   },
   {
     id: 'portfolio',
+    journey: false,
     title: 'このポートフォリオサイト',
     period: '2025年〜',
     era: 'university',
