@@ -1,5 +1,6 @@
 ---
 date: 2026-04-09
+category: join
 title: お世話になっていた会社を離れました
 link: https://kiyono-co.jp
 image: ../../assets/images/turtle-icon.jpeg

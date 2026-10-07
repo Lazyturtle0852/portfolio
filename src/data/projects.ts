@@ -91,6 +91,20 @@ export const activities: Activity[] = [
     ],
   },
   {
+    id: 'arcra',
+    title: '株式会社ARCRA',
+    role: 'エンジニア',
+    period: '2026年〜',
+    era: 'university',
+    link: { href: 'https://www.green-japan.com/company/10847', label: '会社紹介' },
+    description:
+      '東京大学松尾研究室発の AI スタートアップです。オーダーメイドの AI やソフトウェアの受託開発と自社サービスを手がけていて、エンジニアとして開発に携わっています。',
+    tags: [
+      { label: '#AI', tone: 'purple' },
+      { label: '#スタートアップ', tone: 'gray' },
+    ],
+  },
+  {
     id: 'life-is-tech',
     title: 'Life is Tech!',
     role: 'メンター（Unity コース）',

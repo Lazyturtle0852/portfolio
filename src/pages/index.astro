@@ -2,7 +2,7 @@
 import { Image } from 'astro:assets'
 import BaseLayout from '../layouts/BaseLayout.astro'
 import JourneySection from '../components/JourneySection.astro'
-import PersonalNewsSection from '../components/PersonalNewsSection.astro'
+import NewsSection from '../components/NewsSection.astro'
 import ActivitiesSection from '../components/ActivitiesSection.astro'
 import WorksSection from '../components/WorksSection.astro'
 import SkillsSection from '../components/SkillsSection.astro'
@@ -10,11 +10,11 @@ import ThemeToggle from '../components/ThemeToggle.astro'
 import turtleIcon from '../assets/images/turtle-icon.jpeg'
 
 const navItems = [
+  { href: '#news', label: 'News' },
   { href: '#timeline', label: 'Journey' },
   { href: '#activities', label: 'Activities' },
   { href: '#works', label: 'Works' },
   { href: '#skills', label: 'Skills' },
-  { href: '#personal-news', label: 'News' },
   { href: '#contact', label: 'Contact' },
 ]
 ---
@@ -64,11 +64,11 @@ const navItems = [
       <p class="mt-2 text-gray-600 dark:text-gray-400">大学2年生 / SFC / 交通 × 画像認識 / 技術と組織</p>
     </section>
 
+    <NewsSection />
     <JourneySection />
     <ActivitiesSection />
     <WorksSection />
     <SkillsSection />
-    <PersonalNewsSection />
 
     <section id="contact" class="py-16 text-center">
       <h2 class="text-3xl font-bold mb-8">Contact</h2>

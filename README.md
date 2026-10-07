@@ -20,7 +20,7 @@ npm run preview  # ビルド結果をローカルで確認
 
 | 内容 | 場所 |
 | --- | --- |
-| News | `src/content/news/*.md`（1件1ファイル） |
+| News | `src/content/news/*.md`（1件1ファイル。`category` で種類を指定） |
 | Activities / Works | `src/data/projects.ts`（`era` で Journey のサムネイルに出る時代を指定） |
 | Skills | `src/data/skills.ts` |
 | Journey | `src/data/timeline.ts` |
@@ -32,6 +32,7 @@ News を追加するときは、`src/content/news/` に次のような Markdown 
 ```md
 ---
 date: 2026-10-07
+category: release                   # release / join / event / press / award / update（省略時 update）
 title: タイトル
 link: https://example.com           # 省略可
 image: ../../assets/images/xxx.png  # 省略可
