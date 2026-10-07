@@ -58,11 +58,6 @@ html {
 }
 
 
-.float-thumb__img {
-  width: var(--size, 140px);
-  height: var(--size, 140px);
-}
-
 @keyframes float-thumb {
   0%,
   100% {
