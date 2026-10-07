@@ -43,24 +43,6 @@ export const projects: Project[] = [
     ],
   },
   {
-    title: 'Unityによるゲーム開発',
-    period: '大学',
-    image: haitatsuGame,
-    alt: '「絶対に定時配達カンパニー」のゲーム画面',
-    imageClassName: 'h-56 w-full object-cover object-top',
-    link: {
-      href: 'https://unityroom.com/games/haitatsu_615',
-      label: 'ゲームを遊んでみる',
-    },
-    description:
-      'Unityのゲーム開発に挑戦し、実世界の物流問題に焦点を当てたポップなゲーム、「絶対に定時配達カンパニー」を制作しました。',
-    tags: [
-      { label: '#Unity', tone: 'pink' },
-      { label: '#ゲーム開発', tone: 'gray' },
-      { label: '#クリエイティブ', tone: 'gray' },
-    ],
-  },
-  {
     title: '交通×ITの研究',
     period: '大学 (現在)',
     image: icarResearch,
@@ -76,6 +58,24 @@ export const projects: Project[] = [
       { label: '#Web', tone: 'purple' },
       { label: '#交通', tone: 'gray' },
       { label: '#AI', tone: 'gray' },
+    ],
+  },
+  {
+    title: 'Unityによるゲーム開発',
+    period: '大学',
+    image: haitatsuGame,
+    alt: '「絶対に定時配達カンパニー」のゲーム画面',
+    imageClassName: 'h-56 w-full object-cover object-top',
+    link: {
+      href: 'https://unityroom.com/games/haitatsu_615',
+      label: 'ゲームを遊んでみる',
+    },
+    description:
+      'Unityのゲーム開発に挑戦し、実世界の物流問題に焦点を当てたポップなゲーム、「絶対に定時配達カンパニー」を制作しました。',
+    tags: [
+      { label: '#Unity', tone: 'pink' },
+      { label: '#ゲーム開発', tone: 'gray' },
+      { label: '#クリエイティブ', tone: 'gray' },
     ],
   },
   {
