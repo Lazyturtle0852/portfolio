@@ -43,7 +43,8 @@ jobs:
         uses: burnett01/rsync-deployments@7.1.0
         with:
           # rsyncのオプション
-          switches: -avzr --delete
+          # --delete は付けない（サーバー側のファイルを消さず、追加・上書きのみ）
+          switches: -avzr
           
           # 
           # rsh: "ssh -o StrictHostKeyChecking=no"  <--- ★★★ この行は削除しました ★★★
