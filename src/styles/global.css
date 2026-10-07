@@ -11,3 +11,71 @@ html {
   /* sticky ヘッダーに見出しが隠れないようにする */
   scroll-padding-top: 6rem;
 }
+
+/* Journey のサムネイル：ほんの少し 3D に傾けて、ふわっと浮かせる */
+.float-thumb {
+  perspective: 600px;
+  animation: float-thumb 6s ease-in-out infinite;
+  animation-delay: var(--delay, 0s);
+}
+
+/* 押しやすいよう、ホバー中は浮遊を止める */
+.float-thumb:hover,
+.float-thumb:focus-within {
+  animation-play-state: paused;
+}
+
+.float-thumb__card {
+  display: block;
+  overflow: hidden;
+  border-radius: 0.75rem;
+  outline: 2px solid transparent;
+  transform: rotateX(12deg) rotateY(var(--ry, 0deg)) rotateZ(var(--rz, 0deg));
+  box-shadow:
+    0 10px 18px -6px rgb(0 0 0 / 0.35),
+    0 3px 6px -2px rgb(0 0 0 / 0.15);
+  transition:
+    transform 0.35s cubic-bezier(0.2, 0.8, 0.2, 1),
+    box-shadow 0.35s;
+}
+
+.float-thumb__card:hover,
+.float-thumb__card:focus-visible {
+  transform: rotateX(0) rotateY(0) rotateZ(0) translateY(-4px) scale(1.08);
+  box-shadow:
+    0 18px 28px -8px rgb(0 0 0 / 0.4),
+    0 6px 10px -4px rgb(0 0 0 / 0.2);
+  outline-color: var(--color-blue-500);
+}
+
+@keyframes float-thumb {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-5px);
+  }
+}
+
+/* サムネイルから飛んできたカードを一瞬光らせる */
+.jump-target:target {
+  animation: jump-flash 1.8s ease-out;
+}
+
+@keyframes jump-flash {
+  0%,
+  40% {
+    box-shadow: 0 0 0 4px var(--color-blue-500);
+  }
+  100% {
+    box-shadow: 0 0 0 4px transparent;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .float-thumb,
+  .jump-target:target {
+    animation: none;
+  }
+}

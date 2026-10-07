@@ -1,5 +1,6 @@
 ---
 import '../styles/global.css'
+import turtleIcon from '../assets/images/turtle-icon.jpeg'
 
 interface Props {
   title: string
@@ -7,7 +8,9 @@ interface Props {
 }
 
 const { title, description } = Astro.props
-const ogImage = new URL('/assets/images/turtle-icon.jpeg', Astro.site)
+const ogImage = new URL(turtleIcon.src, Astro.site)
+// GitHub Pages のプレビューは検索に載せない
+const isPreview = import.meta.env.PUBLIC_PREVIEW === 'true'
 ---
 
 <!doctype html>
@@ -24,7 +27,8 @@ const ogImage = new URL('/assets/images/turtle-icon.jpeg', Astro.site)
     <meta property="og:image" content={ogImage} />
     <meta property="og:site_name" content="たーとるのポートフォリオ" />
     <meta name="twitter:card" content="summary" />
-    <link rel="icon" href="/assets/images/turtle-icon.jpeg" type="image/jpeg" />
+    <link rel="icon" href={turtleIcon.src} type="image/jpeg" />
+    {isPreview && <meta name="robots" content="noindex, nofollow" />}
     <!-- Google Fonts (Inter + Noto Sans JP) -->
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
