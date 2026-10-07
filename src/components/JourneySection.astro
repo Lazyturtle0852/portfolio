@@ -17,52 +17,65 @@ const thumbsByEra = timelineItems.map((item) => [
     })),
 ])
 
-// 1枚ずつ少しだけ違う向きに傾ける
-const tilts = [
-  { ry: '-14deg', rz: '-3deg' },
-  { ry: '10deg', rz: '2.5deg' },
-  { ry: '-6deg', rz: '1.5deg' },
-  { ry: '14deg', rz: '-2deg' },
+// カード横に雑多に散らす配置。x / y は置き場に対する %、size は px、rz は傾き
+const scatter = [
+  { x: 6, y: 4, size: 92, ry: '-14deg', rz: '-7deg' },
+  { x: 56, y: 0, size: 78, ry: '10deg', rz: '6deg' },
+  { x: 30, y: 36, size: 100, ry: '-6deg', rz: '-2deg' },
+  { x: 72, y: 40, size: 72, ry: '14deg', rz: '9deg' },
+  { x: 0, y: 62, size: 74, ry: '8deg', rz: '5deg' },
+  { x: 54, y: 72, size: 86, ry: '-12deg', rz: '-6deg' },
 ]
+
 ---
 
 <section id="timeline" class="py-16">
   <h2 class="text-3xl font-bold text-center mb-16">My Journey</h2>
-  <div class="max-w-3xl mx-auto px-4">
+  <div class="max-w-3xl lg:max-w-5xl mx-auto px-4">
     {
       timelineItems.map((item, i) => (
         <div class="relative pl-8 sm:pl-32 py-6 group">
           <div class="absolute inset-y-0 left-0 w-1 bg-gray-300 dark:bg-gray-700 rounded-full ml-4 -translate-x-1/2" />
           <div class="absolute w-5 h-5 bg-blue-600 dark:bg-blue-400 rounded-full left-4 -translate-x-1/2 top-1/2 -translate-y-1/2 shadow-lg" />
-          <div class="flex flex-col sm:flex-row items-start">
+          <div class="flex flex-col sm:flex-row sm:flex-wrap lg:flex-nowrap items-start">
             <time class="sm:absolute left-0 translate-y-0.5 inline-block w-auto sm:w-28 text-sm font-semibold uppercase text-gray-600 dark:text-gray-400 mb-2 sm:mb-0 sm:text-right pr-4">
               {item.period}
             </time>
-            <div class="bg-white dark:bg-gray-800 rounded-lg shadow-xl p-6 ml-4 sm:ml-0 flex-1 relative">
+            <div class="bg-white dark:bg-gray-800 rounded-lg shadow-xl p-6 ml-4 sm:ml-0 flex-1 relative lg:max-w-2xl">
               <div class="absolute top-1/2 -left-4 w-4 h-4 bg-white dark:bg-gray-800 transform -translate-y-1/2 rotate-45 hidden sm:block" />
               <h3 class="text-xl font-bold mb-1">{item.title}</h3>
               <p class="text-gray-700 dark:text-gray-300">{item.body}</p>
-              {thumbsByEra[i].length > 0 ? (
-                <ul class="flex flex-wrap gap-3 sm:gap-4 mt-5 pt-1">
-                  {thumbsByEra[i].map((thumb, j) => (
+            </div>
+            {/* 写真のない時代も、PC ではカード幅を揃えるために置き場だけ確保する */}
+            <ul
+              class:list={[
+                'relative self-stretch sm:w-full mt-3 ml-4 sm:ml-0 lg:ml-10 lg:mt-0 lg:w-72 lg:h-auto lg:min-h-44 shrink-0',
+                thumbsByEra[i].length === 0 && 'hidden lg:block',
+                thumbsByEra[i].length > 0 && thumbsByEra[i].length <= 2 && 'h-24',
+                thumbsByEra[i].length > 2 && thumbsByEra[i].length <= 4 && 'h-36',
+                thumbsByEra[i].length > 4 && 'h-44',
+              ]}
+            >
+                {thumbsByEra[i].map((thumb, j) => {
+                  const pos = scatter[j % scatter.length]
+                  return (
                     <li
-                      class="float-thumb"
-                      style={`--ry: ${tilts[j % tilts.length].ry}; --rz: ${tilts[j % tilts.length].rz}; --delay: ${-j * 1.3}s`}
+                      class="float-thumb absolute"
+                      style={`left: ${pos.x}%; top: ${pos.y}%; --size: ${pos.size}px; --ry: ${pos.ry}; --rz: ${pos.rz}; --delay: ${-j * 1.3}s`}
                     >
                       <a href={thumb.href} title={thumb.title} class="float-thumb__card">
                         <Image
                           src={thumb.image}
                           alt={thumb.title}
-                          width={160}
-                          height={160}
-                          class="w-14 h-14 sm:w-20 sm:h-20 object-cover"
+                          width={200}
+                          height={200}
+                          class="float-thumb__img object-cover"
                         />
                       </a>
                     </li>
-                  ))}
-                </ul>
-              ) : null}
-            </div>
+                  )
+                })}
+            </ul>
           </div>
         </div>
       ))

@@ -23,6 +23,20 @@ html {
 .float-thumb:hover,
 .float-thumb:focus-within {
   animation-play-state: paused;
+  z-index: 10;
+}
+
+/* スマホでは置き場が狭いので小さめにする */
+.float-thumb__img {
+  width: calc(var(--size, 80px) * 0.68);
+  height: calc(var(--size, 80px) * 0.68);
+}
+
+@media (min-width: 64rem) {
+  .float-thumb__img {
+    width: var(--size, 80px);
+    height: var(--size, 80px);
+  }
 }
 
 .float-thumb__card {
