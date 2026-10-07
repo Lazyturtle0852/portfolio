@@ -1,18 +1,19 @@
 ---
-import { Image } from 'astro:assets'
 import BaseLayout from '../layouts/BaseLayout.astro'
 import JourneySection from '../components/JourneySection.astro'
-import PersonalNewsSection from '../components/PersonalNewsSection.astro'
-import ProjectsSection from '../components/ProjectsSection.astro'
+import NewsSection from '../components/NewsSection.astro'
+import ActivitiesSection from '../components/ActivitiesSection.astro'
+import WorksSection from '../components/WorksSection.astro'
 import SkillsSection from '../components/SkillsSection.astro'
 import ThemeToggle from '../components/ThemeToggle.astro'
-import turtleIcon from '../assets/images/turtle-icon.jpeg'
+import TurtleFlip from '../components/TurtleFlip.astro'
 
 const navItems = [
   { href: '#timeline', label: 'Journey' },
-  { href: '#projects', label: 'Projects' },
+  { href: '#activities', label: 'Activities' },
+  { href: '#works', label: 'Works' },
   { href: '#skills', label: 'Skills' },
-  { href: '#personal-news', label: 'News' },
+  { href: '#news', label: 'News' },
   { href: '#contact', label: 'Contact' },
 ]
 ---
@@ -46,26 +47,24 @@ const navItems = [
 
   <main class="container mx-auto px-6 py-12">
     <section id="hero" class="text-center py-16">
-      <Image
-        class="w-60 h-60 rounded-full object-cover mx-auto mb-6"
-        src={turtleIcon}
-        alt="たーとるのアイコン（亀のイラスト）"
-        width={480}
-        height={480}
-        loading="eager"
-      />
+      <TurtleFlip />
 
-      <h1 class="text-4xl md:text-5xl font-bold mt-6">どうも、たーとるです。</h1>
+      <h1 class="text-4xl md:text-5xl font-bold mt-6">
+        どうも、<span class="flip-name" aria-live="polite"
+          ><span data-flip-front>たーとる</span><span data-flip-back hidden>亀井亮磨</span></span
+        >です。
+      </h1>
       <p class="text-xl md:text-2xl text-gray-700 dark:text-gray-300 mt-4">
         テクノロジーで、社会の課題解決に挑戦しています。
       </p>
-      <p class="mt-2 text-gray-600 dark:text-gray-400">大学1年生 / SFC / IT / 交通 / 画像認識</p>
+      <p class="mt-2 text-gray-600 dark:text-gray-400">大学2年生 / SFC / 交通 × IT（ITS 高度道路交通システム） / 技術と組織</p>
     </section>
 
     <JourneySection />
-    <ProjectsSection />
+    <ActivitiesSection />
+    <WorksSection />
     <SkillsSection />
-    <PersonalNewsSection />
+    <NewsSection />
 
     <section id="contact" class="py-16 text-center">
       <h2 class="text-3xl font-bold mb-8">Contact</h2>

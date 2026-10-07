@@ -1,0 +1,50 @@
+---
+import type { CollectionEntry } from 'astro:content'
+
+interface Props {
+  item: CollectionEntry<'news'>
+}
+
+const { item } = Astro.props
+
+const categoryLabels = {
+  release: 'リリース',
+  join: '所属',
+  event: 'イベント',
+  press: '掲載',
+  award: '選出',
+  update: 'お知らせ',
+}
+
+// 掲載・選出は外からの評価なので、種類の文字色だけ変える
+const highlight = item.data.category === 'press' || item.data.category === 'award'
+const date = item.data.date.toISOString().slice(0, 10)
+---
+
+<li class="flex flex-wrap sm:flex-nowrap items-baseline gap-x-4 gap-y-1 py-3 border-b border-gray-200 dark:border-gray-800">
+  <time datetime={date} class="w-20 shrink-0 text-sm tabular-nums text-gray-500 dark:text-gray-400">
+    {date.slice(0, 7).replace('-', '.')}
+  </time>
+  <span
+    class:list={[
+      'w-16 shrink-0 text-xs',
+      highlight ? 'font-bold text-amber-600 dark:text-amber-400' : 'text-gray-500 dark:text-gray-400',
+    ]}
+  >
+    {categoryLabels[item.data.category]}
+  </span>
+  {
+    item.data.link ? (
+      <a
+        href={item.data.link}
+        target="_blank"
+        rel="noopener noreferrer"
+        class="basis-full sm:basis-auto text-gray-800 dark:text-gray-200 hover:text-blue-600 dark:hover:text-blue-400 hover:underline"
+      >
+        {item.data.title}
+      </a>
+    ) : (
+      <span class="basis-full sm:basis-auto text-gray-800 dark:text-gray-200">{item.data.title}</span>
+    )
+  }
+</li>

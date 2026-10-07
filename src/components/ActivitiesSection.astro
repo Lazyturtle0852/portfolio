@@ -1,0 +1,51 @@
+---
+import { Image } from 'astro:assets'
+import { activities } from '../data/projects'
+import Tags from './Tags.astro'
+---
+
+<section id="activities" class="py-16">
+  <h2 class="text-3xl font-bold text-center mb-3">Activities</h2>
+  <p class="text-center text-gray-600 dark:text-gray-400 mb-12">いま所属している・続けていること</p>
+  <div class="max-w-4xl mx-auto flex flex-col gap-6">
+    {
+      activities.map((activity) => (
+        <article
+          id={`activity-${activity.id}`}
+          class="jump-target bg-white dark:bg-gray-800 rounded-lg shadow-lg overflow-hidden flex flex-col sm:flex-row"
+        >
+          {activity.image ? (
+            <Image
+              class={`h-48 sm:h-auto sm:w-56 shrink-0 ${activity.imageClassName ?? 'object-cover'}`}
+              src={activity.image}
+              alt={activity.alt ?? ''}
+              width={600}
+              style={activity.imageStyle}
+            />
+          ) : null}
+          <div class="p-6 flex-1">
+            <p class="text-sm text-gray-500 dark:text-gray-400 mb-1">
+              {activity.role} ・ {activity.period}
+            </p>
+            <h3 class="text-xl font-bold mb-3">{activity.title}</h3>
+            <p class="text-gray-700 dark:text-gray-300 mb-4">{activity.description}</p>
+            {activity.link ? (
+              <a
+                href={activity.link.href}
+                target="_blank"
+                rel="noopener noreferrer"
+                class="inline-flex items-center text-blue-600 dark:text-blue-400 hover:text-blue-800 dark:hover:text-blue-300 font-semibold mb-4 transition-colors"
+              >
+                {activity.link.label}
+                <svg class="w-4 h-4 ml-1" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
+                </svg>
+              </a>
+            ) : null}
+            <Tags tags={activity.tags} />
+          </div>
+        </article>
+      ))
+    }
+  </div>
+</section>

@@ -1,5 +1,6 @@
 ---
 date: 2026-03-27
+category: join
 title: 清水たくみ研に入りました
 link: https://takumilab.sfc.keio.ac.jp/
 image: ../../assets/images/turtle-icon.jpeg

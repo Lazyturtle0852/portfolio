@@ -1,5 +1,6 @@
 ---
 date: 2026-03-27
+category: release
 title: ポートフォリオの改修
 link: https://github.com/Lazyturtle0852/portfolio/pull/1
 image: ../../assets/images/news1.png

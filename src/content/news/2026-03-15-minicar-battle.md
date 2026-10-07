@@ -1,5 +1,6 @@
 ---
 date: 2026-03-15
+category: event
 title: 自動運転ミニカーレースで決勝に出場しました
 link: https://42tokyo.jp/landing/autonomous-minicar-battle/
 image: ../../assets/images/news3.png

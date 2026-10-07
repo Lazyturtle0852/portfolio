@@ -11,3 +11,127 @@ html {
   /* sticky ヘッダーに見出しが隠れないようにする */
   scroll-padding-top: 6rem;
 }
+
+/* Journey の写真：影をつけて、ふわっと浮かせる */
+.float-thumb {
+  animation: float-thumb 6s ease-in-out infinite;
+  animation-delay: var(--delay, 0s);
+}
+
+/* 押しやすいよう、ホバー中は浮遊を止めて前面に出す */
+.float-thumb:hover,
+.float-thumb:focus-within {
+  animation-play-state: paused;
+  z-index: 10;
+}
+
+.float-thumb__card {
+  display: block;
+  overflow: hidden;
+  border-radius: 0.75rem;
+  outline: 2px solid transparent;
+  box-shadow:
+    0 14px 24px -8px rgb(0 0 0 / 0.35),
+    0 4px 8px -3px rgb(0 0 0 / 0.15);
+  transition:
+    transform 0.35s cubic-bezier(0.2, 0.8, 0.2, 1),
+    box-shadow 0.35s;
+}
+
+.float-thumb__card:hover,
+.float-thumb__card:focus-visible {
+  transform: translateY(-4px) scale(1.05);
+  box-shadow:
+    0 22px 32px -10px rgb(0 0 0 / 0.4),
+    0 8px 12px -5px rgb(0 0 0 / 0.2);
+  outline-color: var(--color-blue-500);
+}
+
+/* 位置が決まるまで見せない（決まったらふわっと出す） */
+.journey-gutter {
+  opacity: 0;
+  transition: opacity 0.4s;
+}
+
+.journey-gutter.is-ready {
+  opacity: 1;
+}
+
+
+@keyframes float-thumb {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-5px);
+  }
+}
+
+/* サムネイルから飛んできたカードを一瞬光らせる */
+.jump-target:target {
+  animation: jump-flash 1.8s ease-out;
+}
+
+@keyframes jump-flash {
+  0%,
+  40% {
+    box-shadow: 0 0 0 4px var(--color-blue-500);
+  }
+  100% {
+    box-shadow: 0 0 0 4px transparent;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .float-thumb,
+  .jump-target:target {
+    animation: none;
+  }
+}
+
+/* ヒーローの亀：裏返すとエクアドルの写真 */
+.turtle-flip {
+  perspective: 900px;
+}
+
+.turtle-flip__card {
+  transform-style: preserve-3d;
+  transition: transform 0.6s cubic-bezier(0.3, 0.7, 0.3, 1);
+  -webkit-user-select: none;
+  user-select: none;
+}
+
+.turtle-flip__face {
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
+  pointer-events: none;
+}
+
+.turtle-flip__back {
+  transform: rotateY(180deg);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .turtle-flip__card {
+    transition: none;
+  }
+}
+
+/* 名前の切り替えは、ふわっと入れ替える */
+.flip-name > span:not([hidden]) {
+  animation: flip-name 0.5s ease-out;
+}
+
+@keyframes flip-name {
+  from {
+    opacity: 0;
+    transform: translateY(0.15em);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .flip-name > span:not([hidden]) {
+    animation: none;
+  }
+}

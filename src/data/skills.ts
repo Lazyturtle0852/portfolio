@@ -14,7 +14,7 @@ export const skills: Skill[] = [
   {
     title: 'Web Development',
     iconlink: 'desktop',
-    body: 'フロントエンドとバックエンドの両方を学習・実践中。Web系のインターンで半年間業務を遂行し、実務経験を積みました。',
+    body: 'フロントエンドとバックエンドの両方を学習・実践中。Web 系の会社で約5ヶ月間エンジニアとして働き、実務経験を積みました。',
   },
   {
     title: 'Unity / C#',
