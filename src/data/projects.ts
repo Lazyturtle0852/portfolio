@@ -11,6 +11,7 @@ import minicar from '../assets/images/news3.png'
 import portfolioSite from '../assets/images/news1.png'
 import cokoyoIcon from '../assets/images/cokoyo-icon.png'
 import takumilab from '../assets/images/takumilab.jpg'
+import arcraLogo from '../assets/images/arcra-logo.png'
 import type { ImageMetadata } from 'astro'
 import type { Era } from './timeline'
 
@@ -96,6 +97,9 @@ export const activities: Activity[] = [
     role: 'エンジニア',
     period: '2026年〜',
     era: 'university',
+    image: arcraLogo,
+    alt: 'ARCRA のロゴ',
+    imageClassName: 'object-contain bg-white',
     link: { href: 'https://www.green-japan.com/company/10847', label: '会社紹介' },
     description:
       '東京大学松尾研究室発の AI スタートアップです。オーダーメイドの AI やソフトウェアの受託開発と自社サービスを手がけていて、エンジニアとして開発に携わっています。',
