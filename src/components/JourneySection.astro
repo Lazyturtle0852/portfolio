@@ -3,7 +3,7 @@ import { Image } from 'astro:assets'
 import { activities, works } from '../data/projects'
 import { timelineItems } from '../data/timeline'
 
-// 各時代のサムネイル。押すと Works / Activities の該当カードへ飛ぶ
+// 各時代の写真。押すと Works / Activities の該当カードへ飛ぶ
 const thumbsByEra = timelineItems.map((item) => [
   ...works
     .filter((work) => work.era === item.era)
@@ -17,66 +17,103 @@ const thumbsByEra = timelineItems.map((item) => [
     })),
 ])
 
-// カード横に雑多に散らす配置。x / y は置き場に対する %、size は px、rz は傾き
-const scatter = [
-  { x: 6, y: 4, size: 92, ry: '-14deg', rz: '-7deg' },
-  { x: 56, y: 0, size: 78, ry: '10deg', rz: '6deg' },
-  { x: 30, y: 36, size: 100, ry: '-6deg', rz: '-2deg' },
-  { x: 72, y: 40, size: 72, ry: '14deg', rz: '9deg' },
-  { x: 0, y: 62, size: 74, ry: '8deg', rz: '5deg' },
-  { x: 54, y: 72, size: 86, ry: '-12deg', rz: '-6deg' },
-]
+// PC では写真を右・左・右…と交互に、カード列の外側へまばらに置く。
+// x は列の端からの距離、top は行の上端からの位置、size は一辺（いずれも px）。
+// 1280px 幅でも画面に収まるよう x + size は 220 以下にする
+const gutterSpots = {
+  right: [
+    { x: 40, top: 8, size: 140 },
+    { x: 96, top: 184, size: 120 },
+    { x: 30, top: 340, size: 132 },
+  ],
+  left: [
+    { x: 80, top: 48, size: 128 },
+    { x: 24, top: 212, size: 140 },
+    { x: 96, top: 388, size: 120 },
+  ],
+}
 
+function gutterSpot(j: number) {
+  const side = j % 2 === 0 ? 'right' : 'left'
+  const spots = gutterSpots[side]
+  return { side, ...spots[Math.floor(j / 2) % spots.length] }
+}
+
+function gutterStyle(j: number) {
+  const spot = gutterSpot(j)
+  // right 側は CSS の left で列の外へ押し出す（left 側はその逆）
+  const prop = spot.side === 'right' ? 'left' : 'right'
+  return `${prop}: calc(100% + ${spot.x}px); top: ${spot.top}px; width: ${spot.size}px; --size: ${spot.size}px; --delay: ${-j * 1.3}s`
+}
+
+// 写真が下にはみ出さないよう、行の最低の高さを写真に合わせる
+const rowMinHeights = thumbsByEra.map((thumbs) =>
+  Math.max(0, ...thumbs.map((_, j) => gutterSpot(j).top + gutterSpot(j).size + 16)),
+)
+
+// スマホ・タブレットではカードの下に並べ、上下に少しずつずらす
+const stackOffsets = [0, 18, 6, 24, 2, 14]
 ---
 
 <section id="timeline" class="py-16">
   <h2 class="text-3xl font-bold text-center mb-16">My Journey</h2>
-  <div class="max-w-3xl lg:max-w-5xl mx-auto px-4">
+  <div class="max-w-3xl mx-auto px-4">
     {
       timelineItems.map((item, i) => (
-        <div class="relative pl-8 sm:pl-32 py-6 group">
+        <div
+          class="relative pl-8 sm:pl-32 py-6 group xl:flex xl:flex-col xl:justify-center xl:min-h-(--row-min)"
+          style={`--row-min: ${rowMinHeights[i]}px`}
+        >
           <div class="absolute inset-y-0 left-0 w-1 bg-gray-300 dark:bg-gray-700 rounded-full ml-4 -translate-x-1/2" />
           <div class="absolute w-5 h-5 bg-blue-600 dark:bg-blue-400 rounded-full left-4 -translate-x-1/2 top-1/2 -translate-y-1/2 shadow-lg" />
-          <div class="flex flex-col sm:flex-row sm:flex-wrap lg:flex-nowrap items-start">
+          <div class="flex flex-col sm:flex-row items-start">
             <time class="sm:absolute left-0 translate-y-0.5 inline-block w-auto sm:w-28 text-sm font-semibold uppercase text-gray-600 dark:text-gray-400 mb-2 sm:mb-0 sm:text-right pr-4">
               {item.period}
             </time>
-            <div class="bg-white dark:bg-gray-800 rounded-lg shadow-xl p-6 ml-4 sm:ml-0 flex-1 relative lg:max-w-2xl">
+            <div class="bg-white dark:bg-gray-800 rounded-lg shadow-xl p-6 ml-4 sm:ml-0 flex-1 relative">
               <div class="absolute top-1/2 -left-4 w-4 h-4 bg-white dark:bg-gray-800 transform -translate-y-1/2 rotate-45 hidden sm:block" />
               <h3 class="text-xl font-bold mb-1">{item.title}</h3>
               <p class="text-gray-700 dark:text-gray-300">{item.body}</p>
             </div>
-            {/* 写真のない時代も、PC ではカード幅を揃えるために置き場だけ確保する */}
-            <ul
-              class:list={[
-                'relative self-stretch sm:w-full mt-3 ml-4 sm:ml-0 lg:ml-10 lg:mt-0 lg:w-72 lg:h-auto lg:min-h-44 shrink-0',
-                thumbsByEra[i].length === 0 && 'hidden lg:block',
-                thumbsByEra[i].length > 0 && thumbsByEra[i].length <= 2 && 'h-24',
-                thumbsByEra[i].length > 2 && thumbsByEra[i].length <= 4 && 'h-36',
-                thumbsByEra[i].length > 4 && 'h-44',
-              ]}
-            >
-                {thumbsByEra[i].map((thumb, j) => {
-                  const pos = scatter[j % scatter.length]
-                  return (
-                    <li
-                      class="float-thumb absolute"
-                      style={`left: ${pos.x}%; top: ${pos.y}%; --size: ${pos.size}px; --ry: ${pos.ry}; --rz: ${pos.rz}; --delay: ${-j * 1.3}s`}
-                    >
-                      <a href={thumb.href} title={thumb.title} class="float-thumb__card">
-                        <Image
-                          src={thumb.image}
-                          alt={thumb.title}
-                          width={200}
-                          height={200}
-                          class="float-thumb__img object-cover"
-                        />
-                      </a>
-                    </li>
-                  )
-                })}
-            </ul>
           </div>
+
+          {thumbsByEra[i].length > 0 ? (
+            <>
+              <ul class="hidden xl:block absolute inset-0 pointer-events-none" aria-label={`${item.period}の写真`}>
+                {thumbsByEra[i].map((thumb, j) => (
+                  <li class="float-thumb absolute pointer-events-auto" style={gutterStyle(j)}>
+                    <a href={thumb.href} title={thumb.title} class="float-thumb__card">
+                      <Image
+                        src={thumb.image}
+                        alt={thumb.title}
+                        width={320}
+                        height={320}
+                        class="float-thumb__img object-cover"
+                      />
+                    </a>
+                  </li>
+                ))}
+              </ul>
+              <ul class="xl:hidden flex flex-wrap gap-x-6 gap-y-4 mt-5 ml-4 sm:ml-0">
+                {thumbsByEra[i].map((thumb, j) => (
+                  <li
+                    class="float-thumb"
+                    style={`margin-top: ${stackOffsets[j % stackOffsets.length]}px; --delay: ${-j * 1.3}s`}
+                  >
+                    <a href={thumb.href} title={thumb.title} class="float-thumb__card">
+                      <Image
+                        src={thumb.image}
+                        alt={thumb.title}
+                        width={320}
+                        height={320}
+                        class="w-24 h-24 sm:w-28 sm:h-28 object-cover"
+                      />
+                    </a>
+                  </li>
+                ))}
+              </ul>
+            </>
+          ) : null}
         </div>
       ))
     }

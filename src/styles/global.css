@@ -12,31 +12,17 @@ html {
   scroll-padding-top: 6rem;
 }
 
-/* Journey のサムネイル：ほんの少し 3D に傾けて、ふわっと浮かせる */
+/* Journey の写真：影をつけて、ふわっと浮かせる */
 .float-thumb {
-  perspective: 600px;
   animation: float-thumb 6s ease-in-out infinite;
   animation-delay: var(--delay, 0s);
 }
 
-/* 押しやすいよう、ホバー中は浮遊を止める */
+/* 押しやすいよう、ホバー中は浮遊を止めて前面に出す */
 .float-thumb:hover,
 .float-thumb:focus-within {
   animation-play-state: paused;
   z-index: 10;
-}
-
-/* スマホでは置き場が狭いので小さめにする */
-.float-thumb__img {
-  width: calc(var(--size, 80px) * 0.68);
-  height: calc(var(--size, 80px) * 0.68);
-}
-
-@media (min-width: 64rem) {
-  .float-thumb__img {
-    width: var(--size, 80px);
-    height: var(--size, 80px);
-  }
 }
 
 .float-thumb__card {
@@ -44,10 +30,9 @@ html {
   overflow: hidden;
   border-radius: 0.75rem;
   outline: 2px solid transparent;
-  transform: rotateX(12deg) rotateY(var(--ry, 0deg)) rotateZ(var(--rz, 0deg));
   box-shadow:
-    0 10px 18px -6px rgb(0 0 0 / 0.35),
-    0 3px 6px -2px rgb(0 0 0 / 0.15);
+    0 14px 24px -8px rgb(0 0 0 / 0.35),
+    0 4px 8px -3px rgb(0 0 0 / 0.15);
   transition:
     transform 0.35s cubic-bezier(0.2, 0.8, 0.2, 1),
     box-shadow 0.35s;
@@ -55,11 +40,16 @@ html {
 
 .float-thumb__card:hover,
 .float-thumb__card:focus-visible {
-  transform: rotateX(0) rotateY(0) rotateZ(0) translateY(-4px) scale(1.08);
+  transform: translateY(-4px) scale(1.05);
   box-shadow:
-    0 18px 28px -8px rgb(0 0 0 / 0.4),
-    0 6px 10px -4px rgb(0 0 0 / 0.2);
+    0 22px 32px -10px rgb(0 0 0 / 0.4),
+    0 8px 12px -5px rgb(0 0 0 / 0.2);
   outline-color: var(--color-blue-500);
+}
+
+.float-thumb__img {
+  width: var(--size, 140px);
+  height: var(--size, 140px);
 }
 
 @keyframes float-thumb {
