@@ -67,11 +67,11 @@ export const activities: Activity[] = [
     imageClassName: 'object-cover',
     link: { href: 'https://icar.sfc.wide.ad.jp/', label: '研究グループのページ' },
     description:
-      '植原啓介合同研究室の研究グループで、首都高との共同研究に参加しています。走行中の車載カメラ映像から道路を識別し、位置まで特定する画像認識 AI モデルを作っています。',
+      '植原啓介合同研究室の研究グループで、首都高との共同研究に参加しています。GPS だけでは首都高の高架の上か下の一般道かを見分けられず、カーナビが誤案内する問題に、カメラ映像から場所を特定する VPR（Visual Place Recognition）で取り組んでいます。スマホでも動く軽さが目標です。',
     tags: [
       { label: '#画像認識', tone: 'purple' },
-      { label: '#交通', tone: 'gray' },
-      { label: '#AI', tone: 'gray' },
+      { label: '#VPR', tone: 'gray' },
+      { label: '#ITS', tone: 'gray' },
     ],
   },
   {
