@@ -6,31 +6,11 @@ import NewsItem from './NewsItem.astro'
 const newsItems = (await getCollection('news')).sort(
   (a, b) => b.data.date.getTime() - a.data.date.getTime() || b.id.localeCompare(a.id),
 )
-
-// トップに出す件数。残りは「過去のニュース」に畳む
-const VISIBLE = 5
-const recent = newsItems.slice(0, VISIBLE)
-const older = newsItems.slice(VISIBLE)
 ---
 
 <section id="news" class="py-16">
-  <h2 class="text-3xl font-bold text-center mb-12">News</h2>
-  <div class="max-w-3xl mx-auto">
-    <ol>
-      {recent.map((item) => <NewsItem item={item} />)}
-    </ol>
-    {
-      older.length > 0 ? (
-        <details class="group mt-2">
-          <summary class="cursor-pointer list-none text-center text-sm font-semibold text-blue-600 dark:text-blue-400 py-2 hover:underline [&::-webkit-details-marker]:hidden">
-            <span class="group-open:hidden">過去のニュース（{older.length}件）を見る</span>
-            <span class="hidden group-open:inline">過去のニュースを閉じる</span>
-          </summary>
-          <ol class="mt-4">
-            {older.map((item) => <NewsItem item={item} />)}
-          </ol>
-        </details>
-      ) : null
-    }
-  </div>
+  <h2 class="text-3xl font-bold text-center mb-10">News</h2>
+  <ol class="max-w-2xl mx-auto border-t border-gray-200 dark:border-gray-800">
+    {newsItems.map((item) => <NewsItem item={item} />)}
+  </ol>
 </section>
